@@ -30,7 +30,34 @@ const Connector = ({ delay }: { delay: number }) => (
   />
 )
 
-export const WorkflowsFeature: React.FC = () => {
+export const WorkflowsFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
+  const t = {
+    en: {
+      badge: 'Automated Workflows',
+      title: 'Community management on',
+      titleHighlight: 'autopilot',
+      description: "Set up intelligent workflows to welcome new members, re-engage ghosts, or flag toxicity. It’s like having a 24/7 moderator who never sleeps.",
+      nodes: [
+        { title: 'Trigger: New Member', sub: 'When someone joins #general' },
+        { title: 'Delay: 1 Hour', sub: 'Wait for initial activity' },
+        { title: 'Action: Send DM', sub: "Send 'Welcome Guide' template" }
+      ],
+      active: 'Workflow Active'
+    },
+    pt: {
+      badge: 'Fluxos Automatizados',
+      title: 'Gestão de comunidade no',
+      titleHighlight: 'piloto automático',
+      description: "Configure fluxos inteligentes para boas-vindas, reengajar fantasmas ou sinalizar toxicidade. É como ter um moderador 24/7 que nunca dorme.",
+      nodes: [
+        { title: 'Gatilho: Novo Membro', sub: 'Quando alguém entra em #geral' },
+        { title: 'Espera: 1 Hora', sub: 'Aguardar atividade inicial' },
+        { title: 'Ação: Enviar DM', sub: "Enviar modelo 'Guia de Boas-vindas'" }
+      ],
+      active: 'Fluxo Ativo'
+    }
+  }[lang];
+
   return (
     <div className="py-24 max-w-7xl mx-auto px-4 md:px-8">
       <div className="flex flex-col lg:flex-row-reverse gap-16 items-center">
@@ -40,17 +67,17 @@ export const WorkflowsFeature: React.FC = () => {
            <ScrollReveal>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wide border border-blue-200">
                 <GitBranch size={14} />
-                <span>Automated Workflows</span>
+                <span>{t.badge}</span>
               </div>
            </ScrollReveal>
            <ScrollReveal delay={0.1}>
               <h2 className="text-4xl md:text-5xl font-bold text-stone-900 leading-tight">
-                Community management on <span className="text-blue-500">autopilot</span>.
+                {t.title} <span className="text-blue-500">{t.titleHighlight}</span>.
               </h2>
            </ScrollReveal>
            <ScrollReveal delay={0.2}>
               <p className="text-lg text-stone-600 leading-relaxed">
-                Set up intelligent workflows to welcome new members, re-engage ghosts, or flag toxicity. It’s like having a 24/7 moderator who never sleeps.
+                {t.description}
               </p>
            </ScrollReveal>
         </div>
@@ -65,8 +92,8 @@ export const WorkflowsFeature: React.FC = () => {
              <div className="relative flex flex-col items-center">
                 <WorkflowNode 
                   icon={Zap} 
-                  title="Trigger: New Member" 
-                  sub="When someone joins #general"
+                  title={t.nodes[0].title} 
+                  sub={t.nodes[0].sub}
                   color="bg-stone-800"
                   delay={0}
                 />
@@ -75,8 +102,8 @@ export const WorkflowsFeature: React.FC = () => {
                 
                 <WorkflowNode 
                   icon={Clock} 
-                  title="Delay: 1 Hour" 
-                  sub="Wait for initial activity"
+                  title={t.nodes[1].title} 
+                  sub={t.nodes[1].sub}
                   color="bg-amber-500"
                   delay={0.4}
                 />
@@ -85,8 +112,8 @@ export const WorkflowsFeature: React.FC = () => {
                 
                 <WorkflowNode 
                   icon={Mail} 
-                  title="Action: Send DM" 
-                  sub="Send 'Welcome Guide' template"
+                  title={t.nodes[2].title} 
+                  sub={t.nodes[2].sub}
                   color="bg-blue-500"
                   delay={0.8}
                 />
@@ -100,7 +127,7 @@ export const WorkflowsFeature: React.FC = () => {
                   className="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2 border border-emerald-200 shadow-sm mt-2"
                 >
                   <CheckCircle size={14} />
-                  <span>Workflow Active</span>
+                  <span>{t.active}</span>
                 </motion.div>
              </div>
            </div>

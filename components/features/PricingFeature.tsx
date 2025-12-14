@@ -4,7 +4,7 @@ import { Check, Sparkles, Zap, Shield, Users, BarChart } from 'lucide-react';
 import { ScrollReveal } from '../ui/ScrollReveal';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export const PricingFeature: React.FC = () => {
+export const PricingFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
   const [members, setMembers] = useState(500);
   
   // Logic: 79 reais for every 500 members
@@ -14,23 +14,64 @@ export const PricingFeature: React.FC = () => {
     setMembers(Number(e.target.value));
   };
 
+  const t = {
+    en: {
+      title: 'Transparent pricing that scales.',
+      subtitle: 'Pay only for the value you get. No hidden fees, no per-seat charges.',
+      labelSize: 'Community Size',
+      unit: 'members',
+      estCost: 'Estimated monthly cost:',
+      month: '/mo',
+      perBlock: '* R$ 79,00 per 500 member block.',
+      included: 'Everything included',
+      features: [
+        "Real-time message analysis",
+        "Automated moderation tools",
+        "Unlimited admin seats",
+        "Advanced sentiment reporting",
+        "MGM AI chat assistant"
+      ],
+      cta: 'Schedule a Demo',
+      disclaimer: 'No credit card required • Cancel anytime'
+    },
+    pt: {
+      title: 'Preço transparente que escala.',
+      subtitle: 'Pague apenas pelo valor que recebe. Sem taxas ocultas, sem cobrança por assento.',
+      labelSize: 'Tamanho da Comunidade',
+      unit: 'membros',
+      estCost: 'Custo mensal estimado:',
+      month: '/mês',
+      perBlock: '* R$ 79,00 por bloco de 500 membros.',
+      included: 'Tudo incluído',
+      features: [
+        "Análise de mensagens em tempo real",
+        "Ferramentas de moderação automática",
+        "Assentos de administrador ilimitados",
+        "Relatórios avançados de sentimento",
+        "Assistente de chat MGM AI"
+      ],
+      cta: 'Agendar Demonstração',
+      disclaimer: 'Sem cartão de crédito • Cancele quando quiser'
+    }
+  }[lang];
+
   const features = [
-    { icon: Zap, text: "Real-time message analysis" },
-    { icon: Shield, text: "Automated moderation tools" },
-    { icon: Users, text: "Unlimited admin seats" },
-    { icon: BarChart, text: "Advanced sentiment reporting" },
-    { icon: Sparkles, text: "MGM AI chat assistant" },
+    { icon: Zap, text: t.features[0] },
+    { icon: Shield, text: t.features[1] },
+    { icon: Users, text: t.features[2] },
+    { icon: BarChart, text: t.features[3] },
+    { icon: Sparkles, text: t.features[4] },
   ];
 
   return (
     <div className="py-24 max-w-7xl mx-auto px-4 md:px-8">
       <div className="text-center max-w-2xl mx-auto mb-16">
         <ScrollReveal>
-           <h2 className="text-4xl font-bold text-stone-900 mb-4">Transparent pricing that scales.</h2>
+           <h2 className="text-4xl font-bold text-stone-900 mb-4">{t.title}</h2>
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
            <p className="text-lg text-stone-600">
-             Pay only for the value you get. No hidden fees, no per-seat charges.
+             {t.subtitle}
            </p>
         </ScrollReveal>
       </div>
@@ -48,13 +89,13 @@ export const PricingFeature: React.FC = () => {
               <div className="space-y-8">
                 <div>
                   <label className="text-xs font-bold text-stone-400 uppercase tracking-widest mb-2 block">
-                    Community Size
+                    {t.labelSize}
                   </label>
                   <div className="flex items-baseline gap-2 mb-6">
                     <span className="text-5xl font-bold text-stone-900 tabular-nums tracking-tight">
                       {members.toLocaleString()}
                     </span>
-                    <span className="text-stone-500 font-medium">members</span>
+                    <span className="text-stone-500 font-medium">{t.unit}</span>
                   </div>
                   
                   {/* Custom Range Slider */}
@@ -96,7 +137,7 @@ export const PricingFeature: React.FC = () => {
                 </div>
 
                 <div className="pt-4 border-t border-stone-100">
-                  <p className="text-sm text-stone-500 mb-1">Estimated monthly cost:</p>
+                  <p className="text-sm text-stone-500 mb-1">{t.estCost}</p>
                   <div className="flex items-end gap-2">
                     <span className="text-2xl font-bold text-stone-900 pb-1">R$</span>
                     <AnimatePresence mode='wait'>
@@ -110,10 +151,10 @@ export const PricingFeature: React.FC = () => {
                         {price.toLocaleString('pt-BR')}
                       </motion.span>
                     </AnimatePresence>
-                    <span className="text-stone-400 font-medium pb-2 text-lg">/mo</span>
+                    <span className="text-stone-400 font-medium pb-2 text-lg">{t.month}</span>
                   </div>
                   <p className="text-xs text-stone-400 mt-2">
-                    * R$ 79,00 per 500 member block.
+                    {t.perBlock}
                   </p>
                 </div>
               </div>
@@ -124,7 +165,7 @@ export const PricingFeature: React.FC = () => {
                   <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center text-orange-600">
                     <Sparkles size={16} />
                   </div>
-                  <h3 className="font-bold text-stone-800">Everything included</h3>
+                  <h3 className="font-bold text-stone-800">{t.included}</h3>
                 </div>
                 
                 <ul className="space-y-4 mb-8">
@@ -139,10 +180,10 @@ export const PricingFeature: React.FC = () => {
                 </ul>
 
                 <TactileButton primary className="w-full justify-center py-4 text-lg h-14 rounded-xl shadow-orange-500/25">
-                  Schedule a Demo
+                  {t.cta}
                 </TactileButton>
                 <p className="text-center text-xs text-stone-400 mt-4">
-                  No credit card required • Cancel anytime
+                  {t.disclaimer}
                 </p>
               </div>
 

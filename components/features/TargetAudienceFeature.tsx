@@ -3,6 +3,7 @@ import { Card } from '../ui/Card';
 import { motion } from 'framer-motion';
 import { ScrollReveal } from '../ui/ScrollReveal';
 import { Briefcase, GraduationCap, Crown, MessageCircle, ArrowRight, ShieldCheck, Database, LayoutGrid } from 'lucide-react';
+import { GlowingEffect } from '../ui/GlowingEffect';
 
 const BentoCard = ({ children, className = "", delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) => (
   <motion.div
@@ -10,10 +11,23 @@ const BentoCard = ({ children, className = "", delay = 0 }: { children: React.Re
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
     transition={{ duration: 0.6, delay, ease: "easeOut" }}
-    className={`bg-white rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden relative group ${className}`}
+    className={`bg-white rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl transition-all duration-500 relative group overflow-hidden ${className}`}
   >
+    <div className="absolute inset-0 z-20 pointer-events-none">
+       <GlowingEffect 
+         spread={40} 
+         glow={true} 
+         disabled={false} 
+         proximity={64} 
+         inactiveZone={0.01} 
+         borderWidth={3}
+         movementDuration={10}
+       />
+    </div>
     <div className="absolute inset-0 bg-stone-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-    {children}
+    <div className="relative z-10 h-full">
+      {children}
+    </div>
   </motion.div>
 );
 
@@ -36,7 +50,7 @@ const AgencyVisual = () => (
   </div>
 );
 
-const UniversityVisual = () => (
+const UniversityVisual = ({ safeLabel, modLabel }: { safeLabel: string, modLabel: string }) => (
   <div className="relative h-32 mt-6 flex items-center justify-center">
     <motion.div 
       animate={{ scale: [1, 1.1, 1] }}
@@ -45,8 +59,8 @@ const UniversityVisual = () => (
     />
     <div className="relative bg-white p-4 rounded-2xl shadow-tactile border border-blue-100 text-center">
        <ShieldCheck className="w-8 h-8 text-blue-500 mx-auto mb-2" />
-       <div className="text-xs font-bold text-stone-700">Safe Space</div>
-       <div className="text-[10px] text-stone-400">Moderation Active</div>
+       <div className="text-xs font-bold text-stone-700">{safeLabel}</div>
+       <div className="text-[10px] text-stone-400">{modLabel}</div>
     </div>
   </div>
 );
@@ -94,17 +108,44 @@ const WhatsappVisual = () => (
   </div>
 );
 
-export const TargetAudienceFeature: React.FC = () => {
+export const TargetAudienceFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
+  const t = {
+    en: {
+      eyebrow: 'Whatever your ecosystem',
+      title: 'MGM gives you',
+      titleHighlight: 'superpowers',
+      desc: 'From idea to enterprise, MGM adapts to the way you manage people, turning every interaction into an asset.',
+      cards: {
+        agency: { title: 'Agency Owners', desc: 'Manage multiple client communities from a single HQ. Generate white-label reports that prove your impact.', link: 'Client Portfolio' },
+        university: { title: 'Universities', desc: 'Create safe, monitored spaces for students and alumni. Detect bullying or distress signals instantly.', safe: 'Safe Space', mod: 'Moderation Active' },
+        paid: { title: 'Paid Communities', desc: 'Reduce churn by identifying at-risk members early. Prove the dollar value of your membership.' },
+        whatsapp: { title: 'Companies on WhatsApp', desc: 'Stop losing data in chat logs. Sync WhatsApp groups directly to your CRM. Turn unstructured chaos into structured insights.' }
+      }
+    },
+    pt: {
+      eyebrow: 'Qualquer que seja seu ecossistema',
+      title: 'MGM te dá',
+      titleHighlight: 'superpoderes',
+      desc: 'Da ideia à empresa, o MGM se adapta à forma como você gerencia pessoas, transformando cada interação em um ativo.',
+      cards: {
+        agency: { title: 'Donos de Agência', desc: 'Gerencie múltiplas comunidades de clientes de um único QG. Gere relatórios white-label que provam seu impacto.', link: 'Portfólio de Clientes' },
+        university: { title: 'Universidades', desc: 'Crie espaços seguros e monitorados para alunos e ex-alunos. Detecte bullying ou sinais de perigo instantaneamente.', safe: 'Espaço Seguro', mod: 'Moderação Ativa' },
+        paid: { title: 'Comunidades Pagas', desc: 'Reduza o churn identificando membros em risco precocemente. Prove o valor financeiro da sua assinatura.' },
+        whatsapp: { title: 'Empresas no WhatsApp', desc: 'Pare de perder dados em logs de chat. Sincronize grupos do WhatsApp diretamente com seu CRM. Transforme o caos em insights estruturados.' }
+      }
+    }
+  }[lang];
+
   return (
     <div className="py-24 max-w-7xl mx-auto px-4 md:px-8 bg-stone-50/30">
       <div className="text-center max-w-3xl mx-auto mb-16">
         <ScrollReveal>
-           <h2 className="text-sm font-bold text-stone-500 uppercase tracking-widest mb-4">Whatever your ecosystem</h2>
-           <h3 className="text-4xl md:text-5xl font-bold text-stone-900 mb-6">MGM gives you <span className="text-orange-500">superpowers</span>.</h3>
+           <h2 className="text-sm font-bold text-stone-500 uppercase tracking-widest mb-4">{t.eyebrow}</h2>
+           <h3 className="text-4xl md:text-5xl font-bold text-stone-900 mb-6">{t.title} <span className="text-orange-500">{t.titleHighlight}</span>.</h3>
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
            <p className="text-lg text-stone-600">
-             From idea to enterprise, MGM adapts to the way you manage people, turning every interaction into an asset.
+             {t.desc}
            </p>
         </ScrollReveal>
       </div>
@@ -119,13 +160,13 @@ export const TargetAudienceFeature: React.FC = () => {
                   <div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 mb-4">
                     <Briefcase size={20} />
                   </div>
-                  <h4 className="text-2xl font-bold text-stone-900 mb-2">Agency Owners</h4>
+                  <h4 className="text-2xl font-bold text-stone-900 mb-2">{t.cards.agency.title}</h4>
                   <p className="text-stone-600 leading-relaxed text-sm">
-                    Manage multiple client communities from a single HQ. Generate white-label reports that prove your impact and justify your retainer every month.
+                    {t.cards.agency.desc}
                   </p>
                 </div>
                 <div className="mt-6 flex items-center gap-2 text-xs font-bold text-orange-600 uppercase tracking-wide group-hover:gap-3 transition-all cursor-pointer">
-                  <span>Client Portfolio</span> <ArrowRight size={14} />
+                  <span>{t.cards.agency.link}</span> <ArrowRight size={14} />
                 </div>
              </div>
              <div className="md:w-1/2 bg-stone-50 rounded-2xl border border-stone-100 p-4 relative overflow-hidden">
@@ -142,11 +183,11 @@ export const TargetAudienceFeature: React.FC = () => {
            <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 mb-4">
              <GraduationCap size={20} />
            </div>
-           <h4 className="text-xl font-bold text-stone-900 mb-2">Universities</h4>
+           <h4 className="text-xl font-bold text-stone-900 mb-2">{t.cards.university.title}</h4>
            <p className="text-stone-600 text-sm mb-4">
-             Create safe, monitored spaces for students and alumni. Detect bullying or distress signals instantly.
+             {t.cards.university.desc}
            </p>
-           <UniversityVisual />
+           <UniversityVisual safeLabel={t.cards.university.safe} modLabel={t.cards.university.mod} />
         </BentoCard>
 
         {/* Card 3: Paid Communities (Span 1) */}
@@ -154,9 +195,9 @@ export const TargetAudienceFeature: React.FC = () => {
            <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 mb-4">
              <Crown size={20} />
            </div>
-           <h4 className="text-xl font-bold text-stone-900 mb-2">Paid Communities</h4>
+           <h4 className="text-xl font-bold text-stone-900 mb-2">{t.cards.paid.title}</h4>
            <p className="text-stone-600 text-sm">
-             Reduce churn by identifying at-risk members early. Prove the dollar value of your membership.
+             {t.cards.paid.desc}
            </p>
            <PaidCommunityVisual />
         </BentoCard>
@@ -169,9 +210,9 @@ export const TargetAudienceFeature: React.FC = () => {
                   <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 mb-4">
                     <MessageCircle size={20} />
                   </div>
-                  <h4 className="text-2xl font-bold text-stone-900 mb-2">Companies on WhatsApp</h4>
+                  <h4 className="text-2xl font-bold text-stone-900 mb-2">{t.cards.whatsapp.title}</h4>
                   <p className="text-stone-600 leading-relaxed text-sm">
-                    Stop losing data in chat logs. Sync WhatsApp groups directly to your CRM. Turn unstructured chaos into structured, searchable customer insights.
+                    {t.cards.whatsapp.desc}
                   </p>
                 </div>
              </div>

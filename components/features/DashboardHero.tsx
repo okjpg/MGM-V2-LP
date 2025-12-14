@@ -9,7 +9,7 @@ const activityData = Array.from({ length: 40 }, (_, i) => ({
   value: Math.floor(Math.random() * 50) + 30 + (i > 30 ? 20 : 0)
 }));
 
-const MetricItem = ({ label, value, trend, icon, delay }: any) => (
+const MetricItem = ({ label, value, trend, icon, delay, vsLabel }: any) => (
   <motion.div 
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -24,12 +24,12 @@ const MetricItem = ({ label, value, trend, icon, delay }: any) => (
     <div className="text-2xl font-bold text-stone-800 tracking-tight">{value}</div>
     <div className={`text-xs font-medium flex items-center ${trend > 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
       {trend > 0 ? <ArrowUpRight size={14} className="mr-1" /> : <ArrowDownRight size={14} className="mr-1" />}
-      {Math.abs(trend)}% vs last week
+      {Math.abs(trend)}% {vsLabel}
     </div>
   </motion.div>
 );
 
-const GroupRow = ({ name, members, status }: any) => {
+const GroupRow = ({ name, members, status, memberLabel }: any) => {
   const statusColors = {
     excellent: 'bg-emerald-100 text-emerald-700',
     positive: 'bg-green-100 text-green-700',
@@ -45,7 +45,7 @@ const GroupRow = ({ name, members, status }: any) => {
         </div>
         <div>
           <div className="text-sm font-semibold text-stone-800">{name}</div>
-          <div className="text-xs text-stone-500">{members} members</div>
+          <div className="text-xs text-stone-500">{members} {memberLabel}</div>
         </div>
       </div>
       <span className={`text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide ${(statusColors as any)[status]}`}>
@@ -55,7 +55,46 @@ const GroupRow = ({ name, members, status }: any) => {
   );
 };
 
-export const DashboardHero: React.FC = () => {
+export const DashboardHero: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
+  const t = {
+    en: {
+      search: 'Ask MGM AI...',
+      metrics: { groups: 'Groups', members: 'Members', messages: 'Messages', engagement: 'Engagement' },
+      vs: 'vs last week',
+      indexTitle: 'Group Engagement',
+      indexStatus: 'Light Attention',
+      indexDesc: 'Last week brought +12% in same-day responses.',
+      activityTitle: 'Group Activity',
+      insightsTitle: 'MGM AI Insights',
+      insights: [
+         { text: "Beta Product group had a 45% drop in engagement.", action: "Reactivate with poll" },
+         { text: "3 groups have unanswered questions for >48h.", action: "Prioritize moderation" },
+         { text: "Activity spikes detected Tuesdays 2pm-4pm.", action: "Schedule content" },
+      ],
+      monitored: 'Monitored Groups',
+      loadMore: 'Load more groups',
+      memberLabel: 'members'
+    },
+    pt: {
+      search: 'Pergunte à MGM AI...',
+      metrics: { groups: 'Grupos', members: 'Membros', messages: 'Mensagens', engagement: 'Engajamento' },
+      vs: 'vs semana passada',
+      indexTitle: 'Engajamento do Grupo',
+      indexStatus: 'Atenção Leve',
+      indexDesc: 'Semana passada teve +12% em respostas no mesmo dia.',
+      activityTitle: 'Atividade do Grupo',
+      insightsTitle: 'Insights MGM AI',
+      insights: [
+         { text: "Grupo Beta Produto teve queda de 45% no engajamento.", action: "Reativar com enquete" },
+         { text: "3 grupos têm perguntas sem resposta há >48h.", action: "Priorizar moderação" },
+         { text: "Picos de atividade detectados Terças 14h-16h.", action: "Agendar conteúdo" },
+      ],
+      monitored: 'Grupos Monitorados',
+      loadMore: 'Carregar mais grupos',
+      memberLabel: 'membros'
+    }
+  }[lang];
+
   return (
     <div className="w-full max-w-6xl mx-auto p-0 md:p-8 perspective-1000">
       {/* Fake Browser UI */}
@@ -69,7 +108,7 @@ export const DashboardHero: React.FC = () => {
         <div className="h-14 md:h-16 border-b border-stone-100 flex items-center justify-between px-4 md:px-6 bg-white/80 backdrop-blur-md sticky top-0 z-10">
           <div className="flex items-center gap-2 text-stone-400">
             <Search size={16} />
-            <span className="text-xs md:text-sm">Ask MGM AI...</span>
+            <span className="text-xs md:text-sm">{t.search}</span>
           </div>
           <div className="flex items-center gap-3 md:gap-4">
             <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-orange-50 flex items-center justify-center text-orange-500">
@@ -89,17 +128,17 @@ export const DashboardHero: React.FC = () => {
           {/* Top Metrics Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <Card className="p-5">
-              <MetricItem label="Groups" value="9" trend={12} icon={<Users />} delay={0.1} />
+              <MetricItem label={t.metrics.groups} value="9" trend={12} icon={<Users />} delay={0.1} vsLabel={t.vs} />
             </Card>
             <Card className="p-5">
-              <MetricItem label="Members" value="486" trend={8} icon={<Users />} delay={0.2} />
+              <MetricItem label={t.metrics.members} value="486" trend={8} icon={<Users />} delay={0.2} vsLabel={t.vs} />
             </Card>
             <Card className="p-5">
-              <MetricItem label="Messages" value="1.2k" trend={-3} icon={<MessageSquare />} delay={0.3} />
+              <MetricItem label={t.metrics.messages} value="1.2k" trend={-3} icon={<MessageSquare />} delay={0.3} vsLabel={t.vs} />
             </Card>
             <Card className="p-5 relative overflow-hidden group cursor-pointer">
               <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <MetricItem label="Engagement" value="78%" trend={15} icon={<TrendingUp />} delay={0.4} />
+              <MetricItem label={t.metrics.engagement} value="78%" trend={15} icon={<TrendingUp />} delay={0.4} vsLabel={t.vs} />
             </Card>
           </div>
 
@@ -113,7 +152,7 @@ export const DashboardHero: React.FC = () => {
                 <div className="flex justify-between items-start mb-6 relative z-10">
                   <div>
                     <h3 className="text-orange-100 text-xs md:text-sm font-medium uppercase tracking-wider mb-1">MGM Index</h3>
-                    <h2 className="text-2xl md:text-3xl font-bold">Group Engagement</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold">{t.indexTitle}</h2>
                   </div>
                   <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
                     <Sparkles className="text-white" size={20} />
@@ -122,7 +161,7 @@ export const DashboardHero: React.FC = () => {
                 
                 <div className="flex items-end gap-3 md:gap-4 relative z-10">
                   <div className="text-5xl md:text-6xl font-bold tracking-tighter">78<span className="text-2xl text-orange-200 font-normal">/100</span></div>
-                  <div className="pb-2 text-orange-100 font-medium text-xs md:text-sm bg-white/10 px-2 md:px-3 py-1 rounded-full whitespace-nowrap">Light Attention</div>
+                  <div className="pb-2 text-orange-100 font-medium text-xs md:text-sm bg-white/10 px-2 md:px-3 py-1 rounded-full whitespace-nowrap">{t.indexStatus}</div>
                 </div>
                 <div className="mt-6 h-2 bg-black/10 rounded-full overflow-hidden">
                   <motion.div 
@@ -132,20 +171,20 @@ export const DashboardHero: React.FC = () => {
                     className="h-full bg-white/90 rounded-full"
                   />
                 </div>
-                <p className="mt-4 text-orange-100 text-xs md:text-sm opacity-90">Last week brought +12% in same-day responses.</p>
+                <p className="mt-4 text-orange-100 text-xs md:text-sm opacity-90">{t.indexDesc}</p>
               </Card>
 
               {/* Activity Chart */}
               <Card>
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                   <h3 className="font-bold text-lg text-stone-800">Group Activity</h3>
+                   <h3 className="font-bold text-lg text-stone-800">{t.activityTitle}</h3>
                    <div className="flex gap-4">
                      <div className="text-center">
-                       <span className="block text-xs text-stone-400 uppercase">Messages</span>
+                       <span className="block text-xs text-stone-400 uppercase">{t.metrics.messages}</span>
                        <span className="block font-bold text-stone-800">38,760</span>
                      </div>
                      <div className="text-center">
-                       <span className="block text-xs text-stone-400 uppercase">Members</span>
+                       <span className="block text-xs text-stone-400 uppercase">{t.metrics.members}</span>
                        <span className="block font-bold text-stone-800">14,096</span>
                      </div>
                    </div>
@@ -178,19 +217,15 @@ export const DashboardHero: React.FC = () => {
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-2 text-orange-500 font-semibold">
                     <Sparkles size={18} />
-                    <span>MGM AI Insights</span>
+                    <span>{t.insightsTitle}</span>
                   </div>
                   <ArrowUpRight size={16} className="text-stone-400" />
                 </div>
                 <div className="space-y-4">
-                  {[
-                    { text: "Beta Product group had a 45% drop in engagement.", action: "Reactivate with poll", icon: "📉" },
-                    { text: "3 groups have unanswered questions for >48h.", action: "Prioritize moderation", icon: "⚠️" },
-                    { text: "Activity spikes detected Tuesdays 2pm-4pm.", action: "Schedule content", icon: "🕒" },
-                  ].map((insight, i) => (
+                  {t.insights.map((insight: any, i: number) => (
                     <div key={i} className="p-4 bg-stone-50 rounded-xl border border-stone-100 hover:border-orange-200 transition-colors cursor-pointer group">
                       <div className="flex gap-3">
-                        <span className="text-lg">{insight.icon}</span>
+                        <span className="text-lg">{["📉", "⚠️", "🕒"][i]}</span>
                         <div>
                           <p className="text-sm text-stone-700 font-medium leading-snug mb-2">{insight.text}</p>
                           <span className="text-xs font-semibold text-orange-600 flex items-center gap-1 group-hover:underline">
@@ -206,17 +241,17 @@ export const DashboardHero: React.FC = () => {
               {/* Monitored Groups List */}
               <Card>
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="font-bold text-stone-800">Monitored Groups</h3>
+                  <h3 className="font-bold text-stone-800">{t.monitored}</h3>
                   <MoreHorizontal size={16} className="text-stone-400" />
                 </div>
                 <div>
-                  <GroupRow name="Product Beta" members={50} status="excellent" />
-                  <GroupRow name="Support VIP" members={51} status="positive" />
-                  <GroupRow name="Marketing Ops" members={52} status="neutral" />
-                  <GroupRow name="Launch Team" members={53} status="attention" />
+                  <GroupRow name="Product Beta" members={50} status="excellent" memberLabel={t.memberLabel} />
+                  <GroupRow name="Support VIP" members={51} status="positive" memberLabel={t.memberLabel} />
+                  <GroupRow name="Marketing Ops" members={52} status="neutral" memberLabel={t.memberLabel} />
+                  <GroupRow name="Launch Team" members={53} status="attention" memberLabel={t.memberLabel} />
                 </div>
                 <button className="w-full mt-4 py-3 text-sm font-medium text-stone-500 bg-stone-50 rounded-xl hover:bg-stone-100 transition-colors">
-                  Load more groups
+                  {t.loadMore}
                 </button>
               </Card>
             </div>

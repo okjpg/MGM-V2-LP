@@ -15,7 +15,54 @@ const data = [
   { name: 'Sun', value: 650 },
 ];
 
-export const AnalyticsFeature: React.FC = () => {
+export const AnalyticsFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
+  const t = {
+    en: {
+      badge: 'Deep Analytics',
+      title: 'Granular data for',
+      titleHighlight: 'growth',
+      description: 'Understand member lifecycle, retention rates, and sentiment trends with enterprise-grade visualization. We track what matters, so you can prove ROI.',
+      stats: { retention: 'Retention', ltv: 'LTV' },
+      btn: 'Explore analytics',
+      chart: {
+        title: 'Growth Velocity',
+        sub: 'Active members vs Message volume'
+      },
+      cards: [
+        { label: "New", val: "124" },
+        { label: "Active", val: "89%" },
+        { label: "Churn", val: "1.2%" }
+      ],
+      insight: {
+        badge: 'Insight detected',
+        text: 'Friday engagement is up',
+        suffix: 'since last schedule change.'
+      }
+    },
+    pt: {
+      badge: 'Análise Profunda',
+      title: 'Dados granulares para',
+      titleHighlight: 'crescimento',
+      description: 'Entenda o ciclo de vida dos membros, taxas de retenção e tendências de sentimento com visualização de nível empresarial. Rastreamos o que importa para provar ROI.',
+      stats: { retention: 'Retenção', ltv: 'LTV' },
+      btn: 'Explorar analytics',
+      chart: {
+        title: 'Velocidade de Crescimento',
+        sub: 'Membros ativos vs Volume de mensagens'
+      },
+      cards: [
+        { label: "Novos", val: "124" },
+        { label: "Ativos", val: "89%" },
+        { label: "Churn", val: "1.2%" }
+      ],
+      insight: {
+        badge: 'Insight detectado',
+        text: 'Engajamento de sexta subiu',
+        suffix: 'desde a última mudança.'
+      }
+    }
+  }[lang];
+
   return (
     <div className="py-24 max-w-7xl mx-auto px-4 md:px-8">
       <div className="flex flex-col lg:flex-row-reverse gap-16 items-center">
@@ -25,33 +72,33 @@ export const AnalyticsFeature: React.FC = () => {
            <ScrollReveal>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-wide border border-emerald-200">
                 <BarChart2 size={14} />
-                <span>Deep Analytics</span>
+                <span>{t.badge}</span>
               </div>
            </ScrollReveal>
            <ScrollReveal delay={0.1}>
               <h2 className="text-4xl md:text-5xl font-bold text-stone-900 leading-tight">
-                Granular data for <span className="text-emerald-600">growth</span>.
+                {t.title} <span className="text-emerald-600">{t.titleHighlight}</span>.
               </h2>
            </ScrollReveal>
            <ScrollReveal delay={0.2}>
               <p className="text-lg text-stone-600 leading-relaxed">
-                Understand member lifecycle, retention rates, and sentiment trends with enterprise-grade visualization. We track what matters, so you can prove ROI.
+                {t.description}
               </p>
            </ScrollReveal>
            
            <ScrollReveal delay={0.3}>
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-4 bg-white rounded-xl border border-stone-100 shadow-sm">
-                   <div className="text-stone-400 text-xs font-bold uppercase tracking-wider mb-1">Retention</div>
+                   <div className="text-stone-400 text-xs font-bold uppercase tracking-wider mb-1">{t.stats.retention}</div>
                    <div className="text-2xl font-bold text-stone-900">+12%</div>
                 </div>
                  <div className="p-4 bg-white rounded-xl border border-stone-100 shadow-sm">
-                   <div className="text-stone-400 text-xs font-bold uppercase tracking-wider mb-1">LTV</div>
+                   <div className="text-stone-400 text-xs font-bold uppercase tracking-wider mb-1">{t.stats.ltv}</div>
                    <div className="text-2xl font-bold text-stone-900">$840</div>
                 </div>
               </div>
               <div className="pt-4">
-                <TactileButton>Explore analytics</TactileButton>
+                <TactileButton>{t.btn}</TactileButton>
               </div>
            </ScrollReveal>
         </div>
@@ -67,8 +114,8 @@ export const AnalyticsFeature: React.FC = () => {
                 {/* Chart Header */}
                 <div className="flex justify-between items-end mb-8">
                   <div>
-                    <h3 className="text-lg font-bold text-stone-800">Growth Velocity</h3>
-                    <p className="text-xs text-stone-500">Active members vs Message volume</p>
+                    <h3 className="text-lg font-bold text-stone-800">{t.chart.title}</h3>
+                    <p className="text-xs text-stone-500">{t.chart.sub}</p>
                   </div>
                   <div className="flex items-center gap-1 text-emerald-600 font-bold bg-emerald-50 px-2 py-1 rounded text-sm">
                     <TrendingUp size={14} />
@@ -98,11 +145,7 @@ export const AnalyticsFeature: React.FC = () => {
 
                 {/* Stats Row */}
                 <div className="grid grid-cols-3 gap-2">
-                   {[
-                     { label: "New", val: "124", icon: Users },
-                     { label: "Active", val: "89%", icon: ActivityIcon },
-                     { label: "Churn", val: "1.2%", icon: ArrowUpRight }
-                   ].map((s, i) => (
+                   {t.cards.map((s: any, i: number) => (
                      <div key={i} className="bg-white p-3 rounded-xl border border-stone-100 flex flex-col items-center text-center">
                        <span className="text-[10px] text-stone-400 font-bold uppercase">{s.label}</span>
                        <span className="font-bold text-stone-800 text-lg">{s.val}</span>
@@ -119,10 +162,10 @@ export const AnalyticsFeature: React.FC = () => {
              >
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                  <span className="text-xs font-bold">Insight detected</span>
+                  <span className="text-xs font-bold">{t.insight.badge}</span>
                 </div>
                 <p className="text-xs text-stone-400 leading-snug">
-                  Friday engagement is up <span className="text-white font-bold">40%</span> since last schedule change.
+                  {t.insight.text} <span className="text-white font-bold">40%</span> {t.insight.suffix}
                 </p>
              </motion.div>
           </motion.div>

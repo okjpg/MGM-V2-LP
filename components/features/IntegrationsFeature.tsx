@@ -14,7 +14,7 @@ const IntegrationIcon: React.FC<IntegrationIconProps> = ({ label, color }) => (
   </div>
 );
 
-export const IntegrationsFeature: React.FC = () => {
+export const IntegrationsFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
   const integrations = [
     { label: 'Slack', color: 'bg-emerald-400' },
     { label: 'Discord', color: 'bg-indigo-400' },
@@ -25,6 +25,11 @@ export const IntegrationsFeature: React.FC = () => {
     { label: 'Discourse', color: 'bg-orange-400' },
     { label: 'Zapier', color: 'bg-orange-500' },
   ];
+
+  const t = {
+    en: { text: 'Works with your existing stack' },
+    pt: { text: 'Funciona com suas ferramentas atuais' }
+  }[lang];
 
   return (
     <div className="py-12 border-y border-stone-100 bg-stone-50/50 overflow-hidden relative">
@@ -45,7 +50,7 @@ export const IntegrationsFeature: React.FC = () => {
       </div>
       
       <div className="text-center mt-8">
-        <p className="text-xs font-bold uppercase tracking-widest text-stone-400">Works with your existing stack</p>
+        <p className="text-xs font-bold uppercase tracking-widest text-stone-400">{t.text}</p>
       </div>
     </div>
   );
