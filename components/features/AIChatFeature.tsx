@@ -7,10 +7,10 @@ import { ScrollReveal } from '../ui/ScrollReveal';
 export const AIChatFeature: React.FC = () => {
   return (
     <div className="py-24 max-w-7xl mx-auto px-4 md:px-8">
-      <div className="flex flex-col md:flex-row items-center gap-16">
+      <div className="flex flex-col lg:flex-row-reverse items-center gap-12 md:gap-16">
         
-        {/* Left: Content */}
-        <div className="md:w-1/2 space-y-8 order-2 md:order-1">
+        {/* Text Content - Right on Desktop, Top on Mobile */}
+        <div className="w-full lg:w-1/2 space-y-8">
            <ScrollReveal>
              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold uppercase tracking-wide border border-indigo-100">
                <Sparkles size={14} />
@@ -45,10 +45,10 @@ export const AIChatFeature: React.FC = () => {
            </ScrollReveal>
         </div>
 
-        {/* Right: Mockup */}
-        <div className="md:w-1/2 w-full perspective-1000 order-1 md:order-2">
+        {/* Mockup - Left on Desktop, Bottom on Mobile */}
+        <div className="w-full lg:w-1/2 perspective-1000">
           <motion.div
-            initial={{ rotateY: 10, rotateX: 5, opacity: 0 }}
+            initial={{ rotateY: -10, rotateX: 5, opacity: 0 }}
             whileInView={{ rotateY: 0, rotateX: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true, margin: "-100px" }}

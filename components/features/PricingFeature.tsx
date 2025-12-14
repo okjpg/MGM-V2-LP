@@ -1,115 +1,155 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, TactileButton } from '../ui/Card';
-import { Check } from 'lucide-react';
+import { Check, Sparkles, Zap, Shield, Users, BarChart } from 'lucide-react';
 import { ScrollReveal } from '../ui/ScrollReveal';
-import { motion } from 'framer-motion';
-
-const PricingCard = ({ title, price, features, recommended }: any) => (
-  <Card className={`relative flex flex-col h-full ${recommended ? 'border-orange-200 shadow-glow ring-1 ring-orange-500/20' : ''}`}>
-    {recommended && (
-      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-stone-900 text-white text-[10px] font-bold uppercase tracking-widest py-1 px-3 rounded-full">
-        Most Popular
-      </div>
-    )}
-    <div className="mb-6">
-      <h3 className="text-lg font-bold text-stone-900">{title}</h3>
-      <div className="mt-4 flex items-baseline">
-        <span className="text-4xl font-bold tracking-tight text-stone-900">${price}</span>
-        <span className="ml-1 text-sm font-semibold text-stone-500">/month</span>
-      </div>
-    </div>
-    <ul className="space-y-4 mb-8 flex-1">
-      {features.map((feature: string, i: number) => (
-        <li key={i} className="flex items-start gap-3">
-          <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 flex-shrink-0 mt-0.5">
-            <Check size={12} strokeWidth={3} />
-          </div>
-          <span className="text-sm text-stone-600 font-medium">{feature}</span>
-        </li>
-      ))}
-    </ul>
-    <TactileButton primary={recommended} className="w-full justify-center">
-      {recommended ? 'Start Free Trial' : 'Get Started'}
-    </TactileButton>
-  </Card>
-);
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const PricingFeature: React.FC = () => {
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15
-      }
-    }
+  const [members, setMembers] = useState(500);
+  
+  // Logic: 79 reais for every 500 members
+  const price = (members / 500) * 79;
+
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMembers(Number(e.target.value));
   };
 
-  const item = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 40, damping: 20 } }
-  };
+  const features = [
+    { icon: Zap, text: "Real-time message analysis" },
+    { icon: Shield, text: "Automated moderation tools" },
+    { icon: Users, text: "Unlimited admin seats" },
+    { icon: BarChart, text: "Advanced sentiment reporting" },
+    { icon: Sparkles, text: "MGM AI chat assistant" },
+  ];
 
   return (
     <div className="py-24 max-w-7xl mx-auto px-4 md:px-8">
       <div className="text-center max-w-2xl mx-auto mb-16">
         <ScrollReveal>
-           <h2 className="text-4xl font-bold text-stone-900 mb-4">Simple, transparent pricing.</h2>
+           <h2 className="text-4xl font-bold text-stone-900 mb-4">Transparent pricing that scales.</h2>
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
-           <p className="text-lg text-stone-600">Start with a 14-day free trial. No credit card required.</p>
+           <p className="text-lg text-stone-600">
+             Pay only for the value you get. No hidden fees, no per-seat charges.
+           </p>
         </ScrollReveal>
       </div>
       
-      <motion.div 
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-50px" }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start"
-      >
-        <motion.div variants={item} className="h-full">
-          <PricingCard 
-            title="Starter" 
-            price="29" 
-            features={[
-              "Monitor up to 3 groups",
-              "7-day data retention",
-              "Basic daily summaries",
-              "1 user seat"
-            ]} 
-          />
-        </motion.div>
-        
-        <motion.div variants={item} className="h-full">
-          <PricingCard 
-            title="Growth" 
-            price="79" 
-            recommended
-            features={[
-              "Monitor up to 10 groups",
-              "30-day data retention",
-              "Real-time alerts",
-              "Advanced sentiment analysis",
-              "5 user seats"
-            ]} 
-          />
-        </motion.div>
-        
-        <motion.div variants={item} className="h-full">
-          <PricingCard 
-            title="Scale" 
-            price="199" 
-            features={[
-              "Unlimited groups",
-              "1-year data retention",
-              "Custom AI reporting",
-              "API Access",
-              "Unlimited seats"
-            ]} 
-          />
-        </motion.div>
-      </motion.div>
+      <ScrollReveal delay={0.2}>
+        <div className="max-w-4xl mx-auto">
+          <Card className="p-8 md:p-12 border-orange-100 shadow-2xl relative overflow-hidden bg-white">
+            
+            {/* Background Decoration */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-orange-50 rounded-full blur-3xl -mr-32 -mt-32 opacity-50 pointer-events-none"></div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+              
+              {/* Left Side: The Calculator */}
+              <div className="space-y-8">
+                <div>
+                  <label className="text-xs font-bold text-stone-400 uppercase tracking-widest mb-2 block">
+                    Community Size
+                  </label>
+                  <div className="flex items-baseline gap-2 mb-6">
+                    <span className="text-5xl font-bold text-stone-900 tabular-nums tracking-tight">
+                      {members.toLocaleString()}
+                    </span>
+                    <span className="text-stone-500 font-medium">members</span>
+                  </div>
+                  
+                  {/* Custom Range Slider */}
+                  <div className="relative w-full h-12 flex items-center">
+                    <input
+                      type="range"
+                      min="500"
+                      max="10000"
+                      step="500"
+                      value={members}
+                      onChange={handleSliderChange}
+                      className="w-full absolute z-20 opacity-0 cursor-pointer h-full"
+                      aria-label="Member count slider"
+                    />
+                    
+                    {/* Visual Track */}
+                    <div className="w-full h-4 bg-stone-100 rounded-full overflow-hidden relative border border-stone-200 shadow-inner z-10">
+                      <motion.div 
+                        className="h-full bg-gradient-to-r from-orange-400 to-orange-500"
+                        style={{ width: `${(members / 10000) * 100}%` }}
+                        layoutId="sliderTrack"
+                      />
+                    </div>
+                    
+                    {/* Visual Thumb */}
+                    <motion.div 
+                      className="absolute h-8 w-8 bg-white border-2 border-orange-500 rounded-full shadow-lg z-10 pointer-events-none flex items-center justify-center"
+                      style={{ left: `calc(${(members / 10000) * 100}% - 16px)` }}
+                    >
+                      <div className="w-2 h-2 bg-orange-500 rounded-full" />
+                    </motion.div>
+                  </div>
+                  
+                  <div className="flex justify-between text-xs text-stone-400 font-medium mt-2 px-1">
+                    <span>500</span>
+                    <span>5k</span>
+                    <span>10k+</span>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-stone-100">
+                  <p className="text-sm text-stone-500 mb-1">Estimated monthly cost:</p>
+                  <div className="flex items-end gap-2">
+                    <span className="text-2xl font-bold text-stone-900 pb-1">R$</span>
+                    <AnimatePresence mode='wait'>
+                      <motion.span 
+                        key={price}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="text-6xl font-bold text-stone-900 tracking-tighter tabular-nums"
+                      >
+                        {price.toLocaleString('pt-BR')}
+                      </motion.span>
+                    </AnimatePresence>
+                    <span className="text-stone-400 font-medium pb-2 text-lg">/mo</span>
+                  </div>
+                  <p className="text-xs text-stone-400 mt-2">
+                    * R$ 79,00 per 500 member block.
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Side: Features & CTA */}
+              <div className="bg-stone-50 rounded-2xl p-6 md:p-8 border border-stone-100">
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center text-orange-600">
+                    <Sparkles size={16} />
+                  </div>
+                  <h3 className="font-bold text-stone-800">Everything included</h3>
+                </div>
+                
+                <ul className="space-y-4 mb-8">
+                  {features.map((feature, i) => (
+                    <li key={i} className="flex items-center gap-3">
+                      <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 flex-shrink-0">
+                        <Check size={12} strokeWidth={3} />
+                      </div>
+                      <span className="text-sm text-stone-600 font-medium">{feature.text}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <TactileButton primary className="w-full justify-center py-4 text-lg h-14 rounded-xl shadow-orange-500/25">
+                  Schedule a Demo
+                </TactileButton>
+                <p className="text-center text-xs text-stone-400 mt-4">
+                  No credit card required • Cancel anytime
+                </p>
+              </div>
+
+            </div>
+          </Card>
+        </div>
+      </ScrollReveal>
     </div>
   );
 };

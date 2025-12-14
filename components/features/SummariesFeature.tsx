@@ -49,7 +49,7 @@ const SummaryCard = ({ group, time, tags, points }: any) => (
 
 export const SummariesFeature: React.FC = () => {
   return (
-    <div className="flex flex-col lg:flex-row gap-16 items-center py-24">
+    <div className="flex flex-col lg:flex-row gap-8 md:gap-16 items-center py-16 md:py-24">
       <div className="lg:w-1/3 space-y-6">
         <ScrollReveal>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-bold uppercase tracking-wide">
@@ -78,13 +78,13 @@ export const SummariesFeature: React.FC = () => {
         </ScrollReveal>
       </div>
 
-      <div className="lg:w-2/3 w-full perspective-1000">
+      <div className="lg:w-2/3 w-full perspective-1000 mt-8 lg:mt-0">
         <motion.div 
-          initial={{ rotateY: -10, x: 40, opacity: 0 }}
-          whileInView={{ rotateY: 0, x: 0, opacity: 1 }}
+          initial={{ rotateY: 0, x: 0, opacity: 0 }}
+          whileInView={{ rotateY: -5, x: 0, opacity: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
           viewport={{ once: true, margin: "-100px" }}
-          className="bg-stone-50 p-6 md:p-8 rounded-[2rem] border border-stone-200 shadow-2xl relative z-10"
+          className="bg-stone-50 p-4 md:p-8 rounded-[2rem] border border-stone-200 shadow-2xl relative z-10"
         >
           {/* Stats Row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -96,7 +96,7 @@ export const SummariesFeature: React.FC = () => {
              ].map((item, i) => (
                 <Card key={i} noPadding className="p-4 flex flex-col justify-between h-24">
                   <span className="text-[10px] text-stone-400 font-bold uppercase tracking-wider">{item.label}</span>
-                  <div className="flex items-center gap-1 text-stone-800 font-bold text-2xl md:text-xl lg:text-2xl">
+                  <div className="flex items-center gap-1 text-stone-800 font-bold text-xl lg:text-2xl">
                     {item.val} {item.icon}
                   </div>
                 </Card>
@@ -132,7 +132,7 @@ export const SummariesFeature: React.FC = () => {
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="mt-6 p-4 bg-orange-50 border border-orange-100 rounded-xl flex items-center justify-between"
+            className="mt-6 p-4 bg-orange-50 border border-orange-100 rounded-xl flex items-center justify-between flex-wrap gap-2"
           >
              <div className="flex items-center gap-3">
                <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-600">

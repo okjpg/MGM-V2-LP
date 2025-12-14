@@ -12,7 +12,7 @@ export const Card: React.FC<CardProps> = ({ children, className = '', noPadding 
     <motion.div
       whileHover={{ y: -2 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
-      className={`bg-white rounded-2xl border border-stone-100 shadow-soft ${noPadding ? '' : 'p-6'} ${className}`}
+      className={`bg-white rounded-2xl border border-stone-100 shadow-soft ${noPadding ? '' : 'p-5 md:p-6'} ${className}`}
     >
       {children}
     </motion.div>

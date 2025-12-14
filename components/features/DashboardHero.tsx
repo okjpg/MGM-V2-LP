@@ -57,37 +57,37 @@ const GroupRow = ({ name, members, status }: any) => {
 
 export const DashboardHero: React.FC = () => {
   return (
-    <div className="w-full max-w-6xl mx-auto p-4 md:p-8 perspective-1000">
+    <div className="w-full max-w-6xl mx-auto p-0 md:p-8 perspective-1000">
       {/* Fake Browser UI */}
       <motion.div 
         initial={{ rotateX: 5, y: 50, opacity: 0 }}
         whileInView={{ rotateX: 0, y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="bg-white rounded-[2rem] shadow-2xl border border-stone-200 overflow-hidden ring-1 ring-stone-900/5"
+        className="bg-white rounded-[1.5rem] md:rounded-[2rem] shadow-2xl border border-stone-200 overflow-hidden ring-1 ring-stone-900/5"
       >
         {/* Top Bar */}
-        <div className="h-16 border-b border-stone-100 flex items-center justify-between px-6 bg-white/80 backdrop-blur-md sticky top-0 z-10">
+        <div className="h-14 md:h-16 border-b border-stone-100 flex items-center justify-between px-4 md:px-6 bg-white/80 backdrop-blur-md sticky top-0 z-10">
           <div className="flex items-center gap-2 text-stone-400">
-            <Search size={18} />
-            <span className="text-sm">Ask MGM AI anything...</span>
+            <Search size={16} />
+            <span className="text-xs md:text-sm">Ask MGM AI...</span>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center text-orange-500">
-              <Sparkles size={16} />
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-orange-50 flex items-center justify-center text-orange-500">
+              <Sparkles size={14} />
             </div>
-            <div className="w-8 h-8 rounded-full bg-stone-50 flex items-center justify-center text-stone-400">
-              <Bell size={16} />
+            <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-stone-50 flex items-center justify-center text-stone-400">
+              <Bell size={14} />
             </div>
-            <div className="w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center text-xs font-bold">
+            <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-stone-900 text-white flex items-center justify-center text-xs font-bold">
               JD
             </div>
           </div>
         </div>
 
-        <div className="p-8 bg-[#FDFBF7]">
+        <div className="p-4 md:p-8 bg-[#FDFBF7]">
           
           {/* Top Metrics Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <Card className="p-5">
               <MetricItem label="Groups" value="9" trend={12} icon={<Users />} delay={0.1} />
             </Card>
@@ -112,17 +112,17 @@ export const DashboardHero: React.FC = () => {
                 <div className="absolute top-0 right-0 p-32 bg-white opacity-5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
                 <div className="flex justify-between items-start mb-6 relative z-10">
                   <div>
-                    <h3 className="text-orange-100 text-sm font-medium uppercase tracking-wider mb-1">MGM Index</h3>
-                    <h2 className="text-3xl font-bold">Group Engagement</h2>
+                    <h3 className="text-orange-100 text-xs md:text-sm font-medium uppercase tracking-wider mb-1">MGM Index</h3>
+                    <h2 className="text-2xl md:text-3xl font-bold">Group Engagement</h2>
                   </div>
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                    <Sparkles className="text-white" size={24} />
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                    <Sparkles className="text-white" size={20} />
                   </div>
                 </div>
                 
-                <div className="flex items-end gap-4 relative z-10">
-                  <div className="text-6xl font-bold tracking-tighter">78<span className="text-2xl text-orange-200 font-normal">/100</span></div>
-                  <div className="pb-2 text-orange-100 font-medium text-sm bg-white/10 px-3 py-1 rounded-full">Light Attention</div>
+                <div className="flex items-end gap-3 md:gap-4 relative z-10">
+                  <div className="text-5xl md:text-6xl font-bold tracking-tighter">78<span className="text-2xl text-orange-200 font-normal">/100</span></div>
+                  <div className="pb-2 text-orange-100 font-medium text-xs md:text-sm bg-white/10 px-2 md:px-3 py-1 rounded-full whitespace-nowrap">Light Attention</div>
                 </div>
                 <div className="mt-6 h-2 bg-black/10 rounded-full overflow-hidden">
                   <motion.div 
@@ -132,12 +132,12 @@ export const DashboardHero: React.FC = () => {
                     className="h-full bg-white/90 rounded-full"
                   />
                 </div>
-                <p className="mt-4 text-orange-100 text-sm opacity-90">Last week brought +12% in same-day responses.</p>
+                <p className="mt-4 text-orange-100 text-xs md:text-sm opacity-90">Last week brought +12% in same-day responses.</p>
               </Card>
 
               {/* Activity Chart */}
               <Card>
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
                    <h3 className="font-bold text-lg text-stone-800">Group Activity</h3>
                    <div className="flex gap-4">
                      <div className="text-center">
@@ -150,7 +150,7 @@ export const DashboardHero: React.FC = () => {
                      </div>
                    </div>
                 </div>
-                <div className="h-48 w-full">
+                <div className="h-40 md:h-48 w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={activityData}>
                       <Bar dataKey="value" radius={[2, 2, 0, 0]}>
