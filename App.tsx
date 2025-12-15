@@ -13,7 +13,7 @@ import { WorkflowsFeature } from './components/features/WorkflowsFeature';
 import { TargetAudienceFeature } from './components/features/TargetAudienceFeature';
 import { ScrollReveal } from './components/ui/ScrollReveal';
 import { GradualSpacing } from './components/ui/GradualSpacing';
-import { AnalyticsDashboard } from './components/pages/AnalyticsDashboard';
+
 import { cn } from './lib/utils';
 
 export type Language = 'en' | 'pt';
@@ -70,7 +70,7 @@ const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HT
       sm: "h-9 rounded-md px-3",
       lg: "h-11 rounded-md px-8"
     };
-    
+
     return (
       <button
         ref={ref}
@@ -84,191 +84,204 @@ Button.displayName = "Button";
 
 // --- Logo Component ---
 export const Logo = ({ className }: { className?: string }) => {
-    return (
-        <div className={cn("flex items-center gap-2", className)}>
-             <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-orange-500/20">
-             <Layout size={18} fill="currentColor" stroke="none" />
-           </div>
-           <span className="font-bold text-xl tracking-tight text-stone-900">MGM</span>
-        </div>
-    )
+  return (
+    <div className={cn("flex items-center gap-2", className)}>
+      <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-orange-500/20">
+        <Layout size={18} fill="currentColor" stroke="none" />
+      </div>
+      <span className="font-bold text-xl tracking-tight text-stone-900">MGM</span>
+    </div>
+  )
 }
 
 // --- New Ultra-Modern Hero Section ---
-export const HeroSection = ({ lang, setLang, onBookDemo }: { lang: Language, setLang: (l: Language) => void, onBookDemo: () => void }) => {
-    const [menuState, setMenuState] = React.useState(false);
-    const [scrolled, setScrolled] = useState(false);
-    const t = content[lang].hero;
+export const HeroSection = ({ lang, setLang }: { lang: Language, setLang: (l: Language) => void }) => {
+  const [menuState, setMenuState] = React.useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const t = content[lang].hero;
 
-    useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 20);
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    const menuItems = [
-        { name: lang === 'en' ? 'Features' : 'Funcionalidades', href: '#features' },
-        { name: lang === 'en' ? 'Analytics' : 'Análise', href: '#analytics' },
-        { name: lang === 'en' ? 'Pricing' : 'Preços', href: '#pricing' },
-    ];
+  const menuItems = [
+    { name: lang === 'en' ? 'Home' : 'Início', href: '#features' },
+    { name: 'Analytics 2.0', href: '#analytics' },
+    { name: lang === 'en' ? 'Pricing' : 'Preços', href: '#pricing' },
+  ];
 
-    return (
-        <div className="relative w-full overflow-hidden bg-[#FDFBF7]">
-            {/* Background Dot Pattern (Matched to Global) */}
-            <div className="absolute inset-0 z-0 h-full w-full bg-[radial-gradient(#e7e5e4_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-            <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-orange-50/40 to-transparent pointer-events-none z-0 mix-blend-multiply" />
+  return (
+    <div className="relative w-full overflow-hidden bg-[#FDFBF7]">
+      {/* Background Dot Pattern (Matched to Global) */}
+      <div className="absolute inset-0 z-0 h-full w-full bg-[radial-gradient(#e7e5e4_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+      <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-orange-50/40 to-transparent pointer-events-none z-0 mix-blend-multiply" />
 
-            {/* Sticky Navigation */}
-            <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md border-b border-stone-200/50 py-3' : 'bg-transparent py-5'}`}>
-                <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-                     <a href="#" className="flex items-center gap-2 z-50 relative">
-                        <Logo />
-                     </a>
-                     
-                     {/* Desktop Nav */}
-                     <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-                        {menuItems.map((item) => (
-                            <a key={item.name} href={item.href} className="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">{item.name}</a>
-                        ))}
-                     </nav>
+      {/* Sticky Navigation */}
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md border-b border-stone-200/50 py-3' : 'bg-transparent py-5'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+          <a href="#" className="flex items-center gap-2 z-50 relative">
+            <Logo />
+          </a>
 
-                     {/* Actions */}
-                     <div className="hidden md:flex items-center gap-3">
-                        <div className="flex items-center bg-stone-100/50 rounded-full p-1 border border-stone-200/50 mr-2">
-                            <button onClick={() => setLang('en')} className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${lang === 'en' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-400 hover:text-stone-600'}`}>EN</button>
-                            <button onClick={() => setLang('pt')} className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${lang === 'pt' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-400 hover:text-stone-600'}`}>PT</button>
-                        </div>
-                        <a href="#" className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3">{t.login}</a>
-                        <Button variant="default" size="sm" onClick={onBookDemo} className="rounded-full px-5 h-9">{t.cta}</Button>
-                     </div>
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+            {menuItems.map((item) => (
+              <a key={item.name} href={item.href} className="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">{item.name}</a>
+            ))}
+          </nav>
 
-                     {/* Mobile Toggle */}
-                     <button className="md:hidden z-50 p-2 text-stone-900" onClick={() => setMenuState(!menuState)}>
-                        {menuState ? <X /> : <Menu />}
-                    </button>
-                </div>
+          {/* Actions */}
+          <div className="hidden md:flex items-center gap-3">
+            <div className="flex items-center bg-stone-100/50 rounded-full p-1 border border-stone-200/50 mr-2">
+              <button onClick={() => setLang('en')} className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${lang === 'en' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-400 hover:text-stone-600'}`}>EN</button>
+              <button onClick={() => setLang('pt')} className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${lang === 'pt' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-400 hover:text-stone-600'}`}>PT</button>
+            </div>
+            <a href="#" className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3">{t.login}</a>
+            <Button variant="default" size="sm" className="rounded-full px-5 h-9">{t.cta}</Button>
+          </div>
 
-                {/* Mobile Menu */}
-                {menuState && (
-                    <div className="absolute top-full left-0 w-full bg-white border-b border-stone-100 p-6 md:hidden shadow-xl flex flex-col gap-4 animate-in slide-in-from-top-5">
-                         {menuItems.map((item) => (
-                            <a key={item.name} href={item.href} className="text-lg font-medium text-stone-900" onClick={() => setMenuState(false)}>{item.name}</a>
-                        ))}
-                         <div className="h-px bg-stone-100 w-full my-2" />
-                         <Button onClick={onBookDemo} className="w-full">{t.cta}</Button>
-                    </div>
-                )}
-            </header>
-
-            <main className="relative z-10 pt-32 pb-20 md:pt-48 md:pb-32 px-6">
-                <div className="max-w-5xl mx-auto text-center flex flex-col items-center">
-                    
-                    {/* Announcement Pill */}
-                    <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-stone-200 shadow-sm text-xs font-semibold text-stone-600 mb-8 hover:border-orange-200 hover:bg-orange-50/50 transition-colors cursor-pointer group"
-                    >
-                        <span className="bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold shadow-sm">NEW</span>
-                        <span className="group-hover:text-stone-900 transition-colors">{t.new}</span>
-                        <ChevronRight size={12} className="text-stone-400 group-hover:translate-x-0.5 transition-transform" />
-                    </motion.div>
-
-                    {/* Headline with Gradual Spacing and Highlight */}
-                    <GradualSpacing 
-                        text={t.title}
-                        highlight={t.highlight}
-                        highlightClassName="!text-orange-500"
-                        className="text-5xl sm:text-7xl lg:text-8xl font-semibold tracking-tight text-stone-900 leading-[1.05]"
-                    />
-
-                    {/* Subtitle */}
-                    <motion.p 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        className="text-lg sm:text-xl text-stone-500 max-w-2xl mb-10 leading-relaxed font-light mt-4"
-                    >
-                        {t.subtitle}
-                    </motion.p>
-
-                    {/* CTAs */}
-                    <motion.div 
-                         initial={{ opacity: 0, y: 20 }}
-                         animate={{ opacity: 1, y: 0 }}
-                         transition={{ duration: 0.5, delay: 0.3 }}
-                         className="flex flex-col sm:flex-row items-center gap-4 mb-20"
-                    >
-                         <button onClick={onBookDemo} className="h-12 px-8 rounded-full bg-stone-900 text-white font-semibold hover:bg-stone-800 transition-all flex items-center gap-2 shadow-xl shadow-stone-900/20 hover:scale-105 active:scale-95 duration-200">
-                            {t.cta} <ArrowRight size={16} />
-                         </button>
-                         <button className="h-12 px-8 rounded-full bg-white border border-stone-200 text-stone-600 font-semibold hover:bg-stone-50 transition-all flex items-center gap-2 hover:border-stone-300 hover:text-stone-900 hover:scale-105 active:scale-95 duration-200 shadow-sm">
-                             <PlayCircle size={18} /> {lang === 'en' ? 'Watch Demo' : 'Ver Demo'}
-                         </button>
-                    </motion.div>
-
-                    {/* Dashboard Container */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                        className="relative w-full max-w-6xl mx-auto perspective-1000"
-                    >
-                        {/* Glow Behind */}
-                        <div className="absolute -inset-4 bg-gradient-to-b from-orange-500/20 to-transparent blur-3xl opacity-40 rounded-[3rem] pointer-events-none" />
-                        
-                        {/* Bezel */}
-                        <div className="relative rounded-[1.5rem] bg-gradient-to-b from-stone-100 to-stone-200/50 p-2 ring-1 ring-inset ring-stone-900/5 lg:rounded-[2rem] lg:p-3 shadow-2xl">
-                            {/* Inner Screen */}
-                            <div className="rounded-[1.2rem] lg:rounded-[1.7rem] bg-white overflow-hidden border border-stone-200/60 shadow-inner">
-                                <DashboardHero lang={lang} />
-                            </div>
-                        </div>
-                    </motion.div>
-
-                </div>
-            </main>
+          {/* Mobile Toggle */}
+          <button className="md:hidden z-50 p-2 text-stone-900" onClick={() => setMenuState(!menuState)}>
+            {menuState ? <X /> : <Menu />}
+          </button>
         </div>
-    )
+
+        {/* Mobile Menu */}
+        {menuState && (
+          <div className="absolute top-full left-0 w-full bg-white border-b border-stone-100 p-6 md:hidden shadow-xl flex flex-col gap-4 animate-in slide-in-from-top-5">
+            {menuItems.map((item) => (
+              <a key={item.name} href={item.href} className="text-lg font-medium text-stone-900" onClick={() => setMenuState(false)}>{item.name}</a>
+            ))}
+            <div className="h-px bg-stone-100 w-full my-2" />
+            <Button className="w-full">{t.cta}</Button>
+          </div>
+        )}
+      </header>
+
+      <main className="relative z-10 pt-32 pb-20 md:pt-48 md:pb-32 px-6">
+        <div className="max-w-5xl mx-auto text-center flex flex-col items-center">
+
+          {/* Announcement Pill */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-stone-200 shadow-sm text-xs font-semibold text-stone-600 mb-8 hover:border-orange-200 hover:bg-orange-50/50 transition-colors cursor-pointer group"
+          >
+            <span className="bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold shadow-sm">NEW</span>
+            <span className="group-hover:text-stone-900 transition-colors">{t.new}</span>
+            <ChevronRight size={12} className="text-stone-400 group-hover:translate-x-0.5 transition-transform" />
+          </motion.div>
+
+          {/* Headline with Gradual Spacing and Highlight */}
+          <GradualSpacing
+            text={t.title}
+            highlight={t.highlight}
+            highlightClassName="!text-orange-500"
+            className="text-5xl sm:text-7xl lg:text-8xl font-semibold tracking-tight text-stone-900 leading-[1.05]"
+          />
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-lg sm:text-xl text-stone-500 max-w-2xl mb-10 leading-relaxed font-light mt-4"
+          >
+            {t.subtitle}
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center gap-4 mb-20"
+          >
+            <button className="h-12 px-8 rounded-full bg-stone-900 text-white font-semibold hover:bg-stone-800 transition-all flex items-center gap-2 shadow-xl shadow-stone-900/20 hover:scale-105 active:scale-95 duration-200">
+              {t.cta} <ArrowRight size={16} />
+            </button>
+            <button className="h-12 px-8 rounded-full bg-white border border-stone-200 text-stone-600 font-semibold hover:bg-stone-50 transition-all flex items-center gap-2 hover:border-stone-300 hover:text-stone-900 hover:scale-105 active:scale-95 duration-200 shadow-sm">
+              <PlayCircle size={18} /> {lang === 'en' ? 'Watch Demo' : 'Ver Demo'}
+            </button>
+          </motion.div>
+
+          {/* Dashboard Container */}
+          <motion.div
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="relative w-full max-w-6xl mx-auto perspective-1000"
+          >
+            {/* Glow Behind */}
+            <div className="absolute -inset-4 bg-gradient-to-b from-orange-500/20 to-transparent blur-3xl opacity-40 rounded-[3rem] pointer-events-none" />
+
+            {/* Bezel */}
+            <div className="relative rounded-[1.5rem] bg-gradient-to-b from-stone-100 to-stone-200/50 p-2 ring-1 ring-inset ring-stone-900/5 lg:rounded-[2rem] lg:p-3 shadow-2xl">
+              {/* Inner Screen */}
+              <div className="rounded-[1.2rem] lg:rounded-[1.7rem] bg-white overflow-hidden border border-stone-200/60 shadow-inner">
+                <DashboardHero lang={lang} />
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
+      </main>
+    </div>
+  )
 }
 
 export default function App() {
-  const [showDashboard, setShowDashboard] = useState(false);
   const [lang, setLang] = useState<Language>('pt');
+  const [currentPage, setCurrentPage] = useState<'home' | 'analytics'>('home');
 
   const t = content[lang];
 
-  const handleLogoClick = () => {
-    setShowDashboard(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Hash-based routing
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash === '#analytics') {
+        setCurrentPage('analytics');
+        window.scrollTo(0, 0);
+      } else {
+        setCurrentPage('home');
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const navigateToAnalytics = () => {
+    window.location.hash = 'analytics';
+    window.scrollTo(0, 0);
   };
 
-  const handleBookDemo = () => {
-    // For this prototype, booking a demo opens the dashboard view as a "Self-guided Demo"
-    setShowDashboard(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const navigateToHome = () => {
+    window.location.hash = '';
   };
 
-  if (showDashboard) {
+  // Lazy load AnalyticsLP
+  const AnalyticsLP = React.lazy(() => import('./components/pages/AnalyticsLP').then(m => ({ default: m.AnalyticsLP })));
+
+  if (currentPage === 'analytics') {
     return (
-      <div className="min-h-screen bg-[#FDFBF7]">
-        <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-stone-100/50">
-           {/* Dashboard header logic is inside AnalyticsDashboard but we need to pass props properly */}
-        </header>
-        <div className="">
-          <AnalyticsDashboard onBack={handleLogoClick} lang={lang} />
-        </div>
-      </div>
+      <React.Suspense fallback={<div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center"><div className="animate-pulse text-stone-400">Loading...</div></div>}>
+        <AnalyticsLP lang={lang} onBack={navigateToHome} setLang={setLang} />
+      </React.Suspense>
     );
   }
 
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-stone-900 font-sans selection:bg-orange-100 selection:text-orange-900 bg-dot-pattern overflow-x-hidden">
-      
+
       <main>
         {/* Main Dashboard Hero Feature */}
-        <HeroSection lang={lang} setLang={setLang} onBookDemo={handleBookDemo} />
+        <HeroSection lang={lang} setLang={setLang} />
 
         <section className="mb-0 mt-12 md:mt-20 relative z-20">
           <IntegrationsFeature lang={lang} />
@@ -282,23 +295,23 @@ export default function App() {
         </section>
 
         <section className="relative bg-gradient-to-b from-stone-50/50 to-white">
-           <AIChatFeature lang={lang} />
+          <AIChatFeature lang={lang} />
         </section>
 
         <section className="relative">
-           <AlertsFeature lang={lang} />
+          <AlertsFeature lang={lang} />
         </section>
 
         <section id="analytics" className="bg-white border-y border-stone-100">
-           <AnalyticsFeature lang={lang} />
+          <AnalyticsFeature lang={lang} />
         </section>
 
         <section className="relative">
-           <MemberInsightsFeature lang={lang} />
+          <MemberInsightsFeature lang={lang} />
         </section>
 
         <section className="bg-white border-y border-stone-100">
-           <WorkflowsFeature lang={lang} />
+          <WorkflowsFeature lang={lang} />
         </section>
 
         <section className="relative bg-stone-50/20 border-t border-stone-100">
@@ -313,67 +326,66 @@ export default function App() {
         <section className="py-24 px-4">
           <ScrollReveal>
             <div className="max-w-5xl mx-auto bg-stone-900 rounded-[2.5rem] p-8 md:p-24 text-center relative overflow-hidden shadow-2xl">
-               <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
-               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-500/30 blur-[100px] rounded-full"></div>
-               
-               <div className="relative z-10">
-                 <h2 className="text-3xl md:text-6xl font-bold text-white mb-6 md:mb-8 tracking-tight">{t.footer.title}</h2>
-                 <p className="text-lg md:text-xl text-stone-400 mb-8 md:mb-10 max-w-2xl mx-auto">{t.footer.desc}</p>
-                 <motion.button 
-                   whileHover={{ scale: 1.05 }}
-                   whileTap={{ scale: 0.95 }}
-                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                   onClick={handleBookDemo}
-                   className="bg-white text-stone-900 px-8 py-4 md:px-10 md:py-5 rounded-2xl font-bold text-lg hover:bg-stone-100 transition-colors shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] w-full md:w-auto"
-                 >
-                   {t.footer.cta}
-                 </motion.button>
-               </div>
+              <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-500/30 blur-[100px] rounded-full"></div>
+
+              <div className="relative z-10">
+                <h2 className="text-3xl md:text-6xl font-bold text-white mb-6 md:mb-8 tracking-tight">{t.footer.title}</h2>
+                <p className="text-lg md:text-xl text-stone-400 mb-8 md:mb-10 max-w-2xl mx-auto">{t.footer.desc}</p>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="bg-white text-stone-900 px-8 py-4 md:px-10 md:py-5 rounded-2xl font-bold text-lg hover:bg-stone-100 transition-colors shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] w-full md:w-auto"
+                >
+                  {t.footer.cta}
+                </motion.button>
+              </div>
             </div>
           </ScrollReveal>
         </section>
 
         {/* Footer */}
         <footer className="bg-white text-stone-500 py-20 border-t border-stone-200">
-           <div className="max-w-7xl mx-auto px-4 md:px-8">
-             <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-               <div className="col-span-1 md:col-span-2">
-                 <div className="flex items-center gap-2 mb-6 text-stone-900">
-                    <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-white">
-                      <Layout size={18} fill="currentColor" stroke="none" />
-                    </div>
-                    <span className="font-bold text-xl tracking-tight">MGM</span>
-                 </div>
-                 <p className="max-w-sm text-lg font-light">
-                   The operating system for modern communities. <br/>Built for calmness in a chaotic world.
-                 </p>
-               </div>
-               <div>
-                 <h4 className="text-stone-900 font-bold mb-6">{t.footer.product}</h4>
-                 <ul className="space-y-4">
-                   <li><a href="#features" className="hover:text-orange-600 transition-colors">Features</a></li>
-                   <li><a href="#" className="hover:text-orange-600 transition-colors">Integrations</a></li>
-                   <li><a href="#pricing" className="hover:text-orange-600 transition-colors">Pricing</a></li>
-                 </ul>
-               </div>
-               <div>
-                 <h4 className="text-stone-900 font-bold mb-6">{t.footer.company}</h4>
-                 <ul className="space-y-4">
-                   <li><a href="#" className="hover:text-orange-600 transition-colors">About</a></li>
-                   <li><a href="#" className="hover:text-orange-600 transition-colors">Blog</a></li>
-                   <li><a href="#" className="hover:text-orange-600 transition-colors">Careers</a></li>
-                   <li><a href="#" className="hover:text-orange-600 transition-colors">Contact</a></li>
-                 </ul>
-               </div>
-             </div>
-             <div className="pt-8 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center text-sm">
-               <p className="mb-4 md:mb-0">&copy; 2024 MyGroupMetrics Inc. {t.footer.rights}</p>
-               <div className="flex gap-6">
-                 <a href="#" className="hover:text-stone-900">Privacy</a>
-                 <a href="#" className="hover:text-stone-900">Terms</a>
-               </div>
-             </div>
-           </div>
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+              <div className="col-span-1 md:col-span-2">
+                <div className="flex items-center gap-2 mb-6 text-stone-900">
+                  <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-white">
+                    <Layout size={18} fill="currentColor" stroke="none" />
+                  </div>
+                  <span className="font-bold text-xl tracking-tight">MGM</span>
+                </div>
+                <p className="max-w-sm text-lg font-light">
+                  The operating system for modern communities. <br />Built for calmness in a chaotic world.
+                </p>
+              </div>
+              <div>
+                <h4 className="text-stone-900 font-bold mb-6">{t.footer.product}</h4>
+                <ul className="space-y-4">
+                  <li><a href="#features" className="hover:text-orange-600 transition-colors">Features</a></li>
+                  <li><a href="#" className="hover:text-orange-600 transition-colors">Integrations</a></li>
+                  <li><a href="#pricing" className="hover:text-orange-600 transition-colors">Pricing</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-stone-900 font-bold mb-6">{t.footer.company}</h4>
+                <ul className="space-y-4">
+                  <li><a href="#" className="hover:text-orange-600 transition-colors">About</a></li>
+                  <li><a href="#" className="hover:text-orange-600 transition-colors">Blog</a></li>
+                  <li><a href="#" className="hover:text-orange-600 transition-colors">Careers</a></li>
+                  <li><a href="#" className="hover:text-orange-600 transition-colors">Contact</a></li>
+                </ul>
+              </div>
+            </div>
+            <div className="pt-8 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center text-sm">
+              <p className="mb-4 md:mb-0">&copy; 2024 MyGroupMetrics Inc. {t.footer.rights}</p>
+              <div className="flex gap-6">
+                <a href="#" className="hover:text-stone-900">Privacy</a>
+                <a href="#" className="hover:text-stone-900">Terms</a>
+              </div>
+            </div>
+          </div>
         </footer>
       </main>
     </div>

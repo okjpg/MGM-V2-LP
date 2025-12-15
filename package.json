@@ -9,11 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "framer-motion": "^12.23.26",
+    "gsap": "^3.14.2",
+    "lucide-react": "^0.561.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "lucide-react": "^0.561.0",
-    "recharts": "^3.5.1",
-    "framer-motion": "^12.23.26"
+    "recharts": "^3.5.1"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
