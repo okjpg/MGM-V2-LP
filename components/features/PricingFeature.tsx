@@ -31,7 +31,7 @@ export const PricingFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
         "Advanced sentiment reporting",
         "MGM AI chat assistant"
       ],
-      cta: 'Schedule a Demo',
+      cta: 'Book a Demo',
       disclaimer: 'No credit card required • Cancel anytime'
     },
     pt: {
@@ -50,7 +50,7 @@ export const PricingFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
         "Relatórios avançados de sentimento",
         "Assistente de chat MGM AI"
       ],
-      cta: 'Agendar Demonstração',
+      cta: 'Agendar Demo',
       disclaimer: 'Sem cartão de crédito • Cancele quando quiser'
     }
   }[lang];

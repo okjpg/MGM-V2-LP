@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
+import { useScroll, useTransform, motion, MotionValue, useSpring } from "framer-motion";
 
 export const ContainerScroll = ({
   titleComponent,
@@ -29,9 +29,16 @@ export const ContainerScroll = ({
     return isMobile ? [0.7, 0.9] : [1.05, 1];
   };
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
-  const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  // Smooth out the scroll progress using a spring
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const rotate = useTransform(smoothProgress, [0, 1], [20, 0]);
+  const scale = useTransform(smoothProgress, [0, 1], scaleDimensions());
+  const translate = useTransform(smoothProgress, [0, 1], [0, -100]);
 
   return (
     <div
@@ -74,7 +81,7 @@ export const Card = ({
   rotate: MotionValue<number>;
   scale: MotionValue<number>;
   translate: MotionValue<number>;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) => {
   return (
     <motion.div

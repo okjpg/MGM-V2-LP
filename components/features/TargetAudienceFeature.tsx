@@ -5,12 +5,12 @@ import { ScrollReveal } from '../ui/ScrollReveal';
 import { Briefcase, GraduationCap, Crown, MessageCircle, ArrowRight, ShieldCheck, Database, LayoutGrid } from 'lucide-react';
 import { GlowingEffect } from '../ui/GlowingEffect';
 
-const BentoCard = ({ children, className = "", delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) => (
+const BentoCard = ({ children, className = "", delay = 0 }: { children?: React.ReactNode, className?: string, delay?: number }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
+    initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
-    transition={{ duration: 0.6, delay, ease: "easeOut" }}
+    transition={{ duration: 1.0, delay, ease: [0.22, 1, 0.36, 1] }}
     className={`bg-white rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl transition-all duration-500 relative group overflow-hidden ${className}`}
   >
     <div className="absolute inset-0 z-20 pointer-events-none">
@@ -73,7 +73,7 @@ const PaidCommunityVisual = () => (
           key={i}
           initial={{ height: 0 }}
           whileInView={{ height: `${h}%` }}
-          transition={{ duration: 1, delay: i * 0.1 }}
+          transition={{ duration: 1.2, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="w-full bg-amber-400 rounded-t-lg opacity-80 group-hover:opacity-100 transition-opacity"
         />
       ))}

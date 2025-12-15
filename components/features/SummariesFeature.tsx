@@ -55,8 +55,8 @@ export const SummariesFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
       titleHighlight: 'clarity',
       subtitle: 'instantly.',
       description: "Don't read thousands of messages. MGM AI digests daily discussions, highlights actionable items, and identifies sentiment shifts automatically.",
-      btnStart: 'Start summarizing',
-      btnDemo: 'View demo',
+      btnStart: 'Book a Demo',
+      btnDemo: 'View Features',
       stats: { generated: 'Generated', actions: 'Actions', sentiment: 'Sentiment', insights: 'Insights', positive: 'Positive' },
       card1: {
          tags: ['Planning', 'Feedback'],
@@ -76,8 +76,8 @@ export const SummariesFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
       titleHighlight: 'clareza',
       subtitle: 'instantaneamente.',
       description: "Não leia milhares de mensagens. A MGM AI digere discussões diárias, destaca itens acionáveis e identifica mudanças de sentimento automaticamente.",
-      btnStart: 'Começar a resumir',
-      btnDemo: 'Ver demo',
+      btnStart: 'Agendar Demo',
+      btnDemo: 'Ver Funcionalidades',
       stats: { generated: 'Gerados', actions: 'Ações', sentiment: 'Sentimento', insights: 'Insights', positive: 'Positivo' },
       card1: {
          tags: ['Planejamento', 'Feedback'],

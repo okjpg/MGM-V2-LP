@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Layout, Menu, X, ChevronRight, Globe } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Menu, X, Layout, ArrowRight, PlayCircle, ChevronRight } from 'lucide-react';
 import { DashboardHero } from './components/features/DashboardHero';
 import { SummariesFeature } from './components/features/SummariesFeature';
 import { AlertsFeature } from './components/features/AlertsFeature';
@@ -11,61 +11,45 @@ import { PricingFeature } from './components/features/PricingFeature';
 import { MemberInsightsFeature } from './components/features/MemberInsightsFeature';
 import { WorkflowsFeature } from './components/features/WorkflowsFeature';
 import { TargetAudienceFeature } from './components/features/TargetAudienceFeature';
-import { TactileButton } from './components/ui/Card';
 import { ScrollReveal } from './components/ui/ScrollReveal';
-import { ContainerScroll } from './components/ui/ContainerScroll';
+import { GradualSpacing } from './components/ui/GradualSpacing';
 import { AnalyticsDashboard } from './components/pages/AnalyticsDashboard';
+import { cn } from './lib/utils';
 
 export type Language = 'en' | 'pt';
 
 const content = {
   en: {
-    nav: {
-      features: 'Features',
-      analytics: 'Analytics',
-      pricing: 'Pricing',
-      dashboard: 'View Dashboard Demo',
-      back: 'Back to Home'
-    },
     hero: {
-      new: 'New: AI Analysis 2.0',
-      title1: 'Community insights',
-      title2: 'that actually matter.',
-      subtitle: 'MGM turns noisy chat logs into actionable intelligence. Monitor, summarize, and grow with tactile precision.',
-      ctaLive: 'View Live Dashboard',
-      ctaFeatures: 'See Features',
-      trusted: 'Trusted by 500+ Community Managers'
+      title: 'Community intelligence, simplified.',
+      highlight: 'intelligence',
+      subtitle: 'MGM transforms noisy chat logs into actionable insights. Monitor sentiment, predict churn, and grow your community with tactile precision.',
+      cta: 'Book a Demo',
+      login: 'Login',
+      new: 'MGM AI 2.0 is now live'
     },
     footer: {
       title: 'Ready to calm the chaos?',
       desc: 'Join thousands of community builders who use MGM to turn conversation into conversion.',
-      cta: 'View Live Dashboard',
+      cta: 'Book a Demo',
       product: 'Product',
       company: 'Company',
       rights: 'All rights reserved.'
     }
   },
   pt: {
-    nav: {
-      features: 'Funcionalidades',
-      analytics: 'Análise',
-      pricing: 'Preços',
-      dashboard: 'Ver Demo do Painel',
-      back: 'Voltar ao Início'
-    },
     hero: {
-      new: 'Novo: Análise IA 2.0',
-      title1: 'Insights de comunidade',
-      title2: 'que realmente importam.',
-      subtitle: 'O MGM transforma logs de chat ruidosos em inteligência acionável. Monitore, resuma e cresça com precisão tátil.',
-      ctaLive: 'Ver Painel Ao Vivo',
-      ctaFeatures: 'Ver Funcionalidades',
-      trusted: 'Confiado por mais de 500 Gestores'
+      title: 'Inteligência de comunidade, simplificada.',
+      highlight: 'Inteligência',
+      subtitle: 'MGM transforma grupos de whatsapp em insights acionáveis. Monitore sentimento, preveja churn e cresça sua comunidade de dados.',
+      cta: 'Agendar Demo',
+      login: 'Entrar',
+      new: 'MGM AI 2.0 está no ar'
     },
     footer: {
       title: 'Pronto para acalmar o caos?',
       desc: 'Junte-se a milhares de construtores de comunidades que usam o MGM para transformar conversa em conversão.',
-      cta: 'Ver Painel Ao Vivo',
+      cta: 'Agendar Demo',
       product: 'Produto',
       company: 'Empresa',
       rights: 'Todos os direitos reservados.'
@@ -73,152 +57,185 @@ const content = {
   }
 };
 
-interface NavbarProps {
-  onToggleDashboard: () => void;
-  onLogoClick: () => void;
-  isDashboardActive: boolean;
-  lang: Language;
-  setLang: (lang: Language) => void;
-}
+// --- Minimal Button Component for Hero ---
+const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'default' | 'outline', size?: 'default' | 'sm' | 'lg', asChild?: boolean }>(
+  ({ className, variant = 'default', size = 'default', asChild = false, ...props }, ref) => {
+    const baseStyles = "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
+    const variants = {
+      default: "bg-stone-900 text-stone-50 hover:bg-stone-800 shadow-sm",
+      outline: "border border-stone-200 bg-white hover:bg-stone-50 hover:text-stone-900"
+    };
+    const sizes = {
+      default: "h-10 px-4 py-2",
+      sm: "h-9 rounded-md px-3",
+      lg: "h-11 rounded-md px-8"
+    };
+    
+    return (
+      <button
+        ref={ref}
+        className={cn(baseStyles, variants[variant], sizes[size], className)}
+        {...props}
+      />
+    );
+  }
+);
+Button.displayName = "Button";
 
-const Navbar = ({ onToggleDashboard, onLogoClick, isDashboardActive, lang, setLang }: NavbarProps) => {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const t = content[lang].nav;
-
-  return (
-    <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-stone-100/50">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
-        <div className="flex items-center gap-2 cursor-pointer" onClick={onLogoClick}>
-           <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-orange-500/20">
+// --- Logo Component ---
+export const Logo = ({ className }: { className?: string }) => {
+    return (
+        <div className={cn("flex items-center gap-2", className)}>
+             <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-orange-500/20">
              <Layout size={18} fill="currentColor" stroke="none" />
            </div>
-           <span className="font-bold text-xl tracking-tight text-stone-900">MyGroupMetrics</span>
+           <span className="font-bold text-xl tracking-tight text-stone-900">MGM</span>
         </div>
-        
-        {!isDashboardActive && (
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-sm font-medium text-stone-500 hover:text-stone-900 transition-colors">{t.features}</a>
-            <a href="#analytics" className="text-sm font-medium text-stone-500 hover:text-stone-900 transition-colors">{t.analytics}</a>
-            <a href="#pricing" className="text-sm font-medium text-stone-500 hover:text-stone-900 transition-colors">{t.pricing}</a>
-          </div>
-        )}
+    )
+}
 
-        <div className="hidden md:flex items-center gap-4">
-          <div className="flex items-center bg-stone-100 rounded-full p-1 border border-stone-200">
-             <button 
-               onClick={() => setLang('en')} 
-               className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${lang === 'en' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-400 hover:text-stone-600'}`}
-             >
-               EN
-             </button>
-             <button 
-               onClick={() => setLang('pt')} 
-               className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${lang === 'pt' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-400 hover:text-stone-600'}`}
-             >
-               PT
-             </button>
-          </div>
-          <TactileButton onClick={onToggleDashboard} primary={isDashboardActive}>
-             {isDashboardActive ? t.back : t.dashboard}
-          </TactileButton>
+// --- New Ultra-Modern Hero Section ---
+export const HeroSection = ({ lang, setLang, onBookDemo }: { lang: Language, setLang: (l: Language) => void, onBookDemo: () => void }) => {
+    const [menuState, setMenuState] = React.useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const t = content[lang].hero;
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const menuItems = [
+        { name: lang === 'en' ? 'Features' : 'Funcionalidades', href: '#features' },
+        { name: lang === 'en' ? 'Analytics' : 'Análise', href: '#analytics' },
+        { name: lang === 'en' ? 'Pricing' : 'Preços', href: '#pricing' },
+    ];
+
+    return (
+        <div className="relative w-full overflow-hidden bg-[#FDFBF7]">
+            {/* Background Dot Pattern (Matched to Global) */}
+            <div className="absolute inset-0 z-0 h-full w-full bg-[radial-gradient(#e7e5e4_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+            <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-orange-50/40 to-transparent pointer-events-none z-0 mix-blend-multiply" />
+
+            {/* Sticky Navigation */}
+            <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md border-b border-stone-200/50 py-3' : 'bg-transparent py-5'}`}>
+                <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+                     <a href="#" className="flex items-center gap-2 z-50 relative">
+                        <Logo />
+                     </a>
+                     
+                     {/* Desktop Nav */}
+                     <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+                        {menuItems.map((item) => (
+                            <a key={item.name} href={item.href} className="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">{item.name}</a>
+                        ))}
+                     </nav>
+
+                     {/* Actions */}
+                     <div className="hidden md:flex items-center gap-3">
+                        <div className="flex items-center bg-stone-100/50 rounded-full p-1 border border-stone-200/50 mr-2">
+                            <button onClick={() => setLang('en')} className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${lang === 'en' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-400 hover:text-stone-600'}`}>EN</button>
+                            <button onClick={() => setLang('pt')} className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${lang === 'pt' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-400 hover:text-stone-600'}`}>PT</button>
+                        </div>
+                        <a href="#" className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3">{t.login}</a>
+                        <Button variant="default" size="sm" onClick={onBookDemo} className="rounded-full px-5 h-9">{t.cta}</Button>
+                     </div>
+
+                     {/* Mobile Toggle */}
+                     <button className="md:hidden z-50 p-2 text-stone-900" onClick={() => setMenuState(!menuState)}>
+                        {menuState ? <X /> : <Menu />}
+                    </button>
+                </div>
+
+                {/* Mobile Menu */}
+                {menuState && (
+                    <div className="absolute top-full left-0 w-full bg-white border-b border-stone-100 p-6 md:hidden shadow-xl flex flex-col gap-4 animate-in slide-in-from-top-5">
+                         {menuItems.map((item) => (
+                            <a key={item.name} href={item.href} className="text-lg font-medium text-stone-900" onClick={() => setMenuState(false)}>{item.name}</a>
+                        ))}
+                         <div className="h-px bg-stone-100 w-full my-2" />
+                         <Button onClick={onBookDemo} className="w-full">{t.cta}</Button>
+                    </div>
+                )}
+            </header>
+
+            <main className="relative z-10 pt-32 pb-20 md:pt-48 md:pb-32 px-6">
+                <div className="max-w-5xl mx-auto text-center flex flex-col items-center">
+                    
+                    {/* Announcement Pill */}
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-stone-200 shadow-sm text-xs font-semibold text-stone-600 mb-8 hover:border-orange-200 hover:bg-orange-50/50 transition-colors cursor-pointer group"
+                    >
+                        <span className="bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold shadow-sm">NEW</span>
+                        <span className="group-hover:text-stone-900 transition-colors">{t.new}</span>
+                        <ChevronRight size={12} className="text-stone-400 group-hover:translate-x-0.5 transition-transform" />
+                    </motion.div>
+
+                    {/* Headline with Gradual Spacing and Highlight */}
+                    <GradualSpacing 
+                        text={t.title}
+                        highlight={t.highlight}
+                        highlightClassName="!text-orange-500"
+                        className="text-5xl sm:text-7xl lg:text-8xl font-semibold tracking-tight text-stone-900 leading-[1.05]"
+                    />
+
+                    {/* Subtitle */}
+                    <motion.p 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="text-lg sm:text-xl text-stone-500 max-w-2xl mb-10 leading-relaxed font-light mt-4"
+                    >
+                        {t.subtitle}
+                    </motion.p>
+
+                    {/* CTAs */}
+                    <motion.div 
+                         initial={{ opacity: 0, y: 20 }}
+                         animate={{ opacity: 1, y: 0 }}
+                         transition={{ duration: 0.5, delay: 0.3 }}
+                         className="flex flex-col sm:flex-row items-center gap-4 mb-20"
+                    >
+                         <button onClick={onBookDemo} className="h-12 px-8 rounded-full bg-stone-900 text-white font-semibold hover:bg-stone-800 transition-all flex items-center gap-2 shadow-xl shadow-stone-900/20 hover:scale-105 active:scale-95 duration-200">
+                            {t.cta} <ArrowRight size={16} />
+                         </button>
+                         <button className="h-12 px-8 rounded-full bg-white border border-stone-200 text-stone-600 font-semibold hover:bg-stone-50 transition-all flex items-center gap-2 hover:border-stone-300 hover:text-stone-900 hover:scale-105 active:scale-95 duration-200 shadow-sm">
+                             <PlayCircle size={18} /> {lang === 'en' ? 'Watch Demo' : 'Ver Demo'}
+                         </button>
+                    </motion.div>
+
+                    {/* Dashboard Container */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                        className="relative w-full max-w-6xl mx-auto perspective-1000"
+                    >
+                        {/* Glow Behind */}
+                        <div className="absolute -inset-4 bg-gradient-to-b from-orange-500/20 to-transparent blur-3xl opacity-40 rounded-[3rem] pointer-events-none" />
+                        
+                        {/* Bezel */}
+                        <div className="relative rounded-[1.5rem] bg-gradient-to-b from-stone-100 to-stone-200/50 p-2 ring-1 ring-inset ring-stone-900/5 lg:rounded-[2rem] lg:p-3 shadow-2xl">
+                            {/* Inner Screen */}
+                            <div className="rounded-[1.2rem] lg:rounded-[1.7rem] bg-white overflow-hidden border border-stone-200/60 shadow-inner">
+                                <DashboardHero lang={lang} />
+                            </div>
+                        </div>
+                    </motion.div>
+
+                </div>
+            </main>
         </div>
-
-        <div className="md:hidden flex items-center gap-4">
-           <div className="flex items-center bg-stone-100 rounded-full p-1 border border-stone-200">
-             <button 
-               onClick={() => setLang('en')} 
-               className={`px-2 py-1 rounded-full text-[10px] font-bold transition-all ${lang === 'en' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-400'}`}
-             >
-               EN
-             </button>
-             <button 
-               onClick={() => setLang('pt')} 
-               className={`px-2 py-1 rounded-full text-[10px] font-bold transition-all ${lang === 'pt' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-400'}`}
-             >
-               PT
-             </button>
-          </div>
-          <button className="p-2 text-stone-600" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X /> : <Menu />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="absolute top-20 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-stone-100 p-6 flex flex-col gap-6 md:hidden shadow-2xl overflow-hidden"
-          >
-            <a href="#features" onClick={() => setIsOpen(false)} className="font-medium text-lg text-stone-800">{t.features}</a>
-            <a href="#analytics" onClick={() => setIsOpen(false)} className="font-medium text-lg text-stone-800">{t.analytics}</a>
-            <a href="#pricing" onClick={() => setIsOpen(false)} className="font-medium text-lg text-stone-800">{t.pricing}</a>
-            <hr className="border-stone-100"/>
-            <TactileButton onClick={() => { onToggleDashboard(); setIsOpen(false); }} primary className="justify-center py-3">
-               {isDashboardActive ? t.back : t.dashboard}
-            </TactileButton>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
-  );
-};
-
-const HeroText = ({ onViewDashboard, lang }: { onViewDashboard: () => void, lang: Language }) => {
-  const t = content[lang].hero;
-  return (
-    <div className="pt-24 pb-12 md:pt-32 md:pb-16 text-center px-4 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] md:w-[1000px] h-[600px] bg-gradient-to-b from-orange-100/40 to-transparent rounded-[100%] blur-3xl -z-10" />
-      
-      <motion.div 
-         initial={{ opacity: 0, y: 20 }}
-         animate={{ opacity: 1, y: 0 }}
-         transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <motion.div 
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white border border-stone-200 text-stone-600 text-xs font-bold uppercase tracking-widest mb-6 md:mb-8 shadow-sm cursor-pointer hover:border-orange-200"
-        >
-          <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
-          <span>{t.new}</span>
-          <ChevronRight size={14} className="text-stone-400" />
-        </motion.div>
-        
-        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-stone-900 tracking-tight mb-6 md:mb-8 max-w-5xl mx-auto leading-[1.05]">
-          {t.title1} <br className="hidden md:block"/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">{t.title2}</span>
-        </h1>
-        
-        <p className="text-lg md:text-2xl text-stone-500 max-w-2xl mx-auto mb-10 md:mb-12 leading-relaxed font-light px-2">
-          {t.subtitle}
-        </p>
-        
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4">
-          <TactileButton onClick={onViewDashboard} primary className="w-full sm:w-auto px-8 py-4 text-lg h-14 rounded-2xl justify-center">
-             {t.ctaLive}
-          </TactileButton>
-          <TactileButton className="w-full sm:w-auto px-8 py-4 text-lg h-14 rounded-2xl flex items-center justify-center gap-2">
-            {t.ctaFeatures} <ChevronRight size={16} />
-          </TactileButton>
-        </div>
-
-        <p className="mt-8 text-xs text-stone-400 uppercase tracking-widest font-semibold">
-          {t.trusted}
-        </p>
-      </motion.div>
-    </div>
-  );
-};
+    )
+}
 
 export default function App() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const [showDashboard, setShowDashboard] = useState(false);
-  const [lang, setLang] = useState<Language>('en');
+  const [lang, setLang] = useState<Language>('pt');
 
   const t = content[lang];
 
@@ -227,22 +244,19 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleToggleDashboard = () => {
-    setShowDashboard(!showDashboard);
+  const handleBookDemo = () => {
+    // For this prototype, booking a demo opens the dashboard view as a "Self-guided Demo"
+    setShowDashboard(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   if (showDashboard) {
     return (
       <div className="min-h-screen bg-[#FDFBF7]">
-        <Navbar 
-          onToggleDashboard={handleToggleDashboard} 
-          onLogoClick={handleLogoClick} 
-          isDashboardActive={true} 
-          lang={lang}
-          setLang={setLang}
-        />
-        <div className="pt-20">
+        <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-stone-100/50">
+           {/* Dashboard header logic is inside AnalyticsDashboard but we need to pass props properly */}
+        </header>
+        <div className="">
           <AnalyticsDashboard onBack={handleLogoClick} lang={lang} />
         </div>
       </div>
@@ -251,27 +265,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-stone-900 font-sans selection:bg-orange-100 selection:text-orange-900 bg-dot-pattern overflow-x-hidden">
-      <Navbar 
-        onToggleDashboard={handleToggleDashboard} 
-        onLogoClick={handleLogoClick} 
-        isDashboardActive={false} 
-        lang={lang}
-        setLang={setLang}
-      />
       
-      {/* Scroll Progress Bar */}
-      <motion.div 
-        className="fixed top-20 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-amber-500 origin-left z-50" 
-        style={{ scaleX }}
-      />
-
       <main>
         {/* Main Dashboard Hero Feature */}
-        <section className="relative z-10 pt-20">
-          <ContainerScroll titleComponent={<HeroText onViewDashboard={() => setShowDashboard(true)} lang={lang} />}>
-            <DashboardHero lang={lang} />
-          </ContainerScroll>
-        </section>
+        <HeroSection lang={lang} setLang={setLang} onBookDemo={handleBookDemo} />
 
         <section className="mb-0 mt-12 md:mt-20 relative z-20">
           <IntegrationsFeature lang={lang} />
@@ -325,7 +322,8 @@ export default function App() {
                  <motion.button 
                    whileHover={{ scale: 1.05 }}
                    whileTap={{ scale: 0.95 }}
-                   onClick={() => setShowDashboard(true)}
+                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                   onClick={handleBookDemo}
                    className="bg-white text-stone-900 px-8 py-4 md:px-10 md:py-5 rounded-2xl font-bold text-lg hover:bg-stone-100 transition-colors shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] w-full md:w-auto"
                  >
                    {t.footer.cta}
@@ -344,7 +342,7 @@ export default function App() {
                     <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-white">
                       <Layout size={18} fill="currentColor" stroke="none" />
                     </div>
-                    <span className="font-bold text-xl tracking-tight">MyGroupMetrics</span>
+                    <span className="font-bold text-xl tracking-tight">MGM</span>
                  </div>
                  <p className="max-w-sm text-lg font-light">
                    The operating system for modern communities. <br/>Built for calmness in a chaotic world.
@@ -353,9 +351,9 @@ export default function App() {
                <div>
                  <h4 className="text-stone-900 font-bold mb-6">{t.footer.product}</h4>
                  <ul className="space-y-4">
-                   <li><a href="#" className="hover:text-orange-600 transition-colors">{t.nav.features}</a></li>
+                   <li><a href="#features" className="hover:text-orange-600 transition-colors">Features</a></li>
                    <li><a href="#" className="hover:text-orange-600 transition-colors">Integrations</a></li>
-                   <li><a href="#" className="hover:text-orange-600 transition-colors">{t.nav.pricing}</a></li>
+                   <li><a href="#pricing" className="hover:text-orange-600 transition-colors">Pricing</a></li>
                  </ul>
                </div>
                <div>

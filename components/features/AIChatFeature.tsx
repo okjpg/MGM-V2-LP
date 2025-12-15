@@ -95,7 +95,7 @@ export const AIChatFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
           <motion.div
             initial={{ rotateY: -10, rotateX: 5, opacity: 0 }}
             whileInView={{ rotateY: 0, rotateX: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true, margin: "-100px" }}
           >
             <Card className="min-h-[500px] flex flex-col p-0 overflow-hidden shadow-2xl bg-white/80 backdrop-blur-xl border-indigo-50/50">
@@ -114,7 +114,7 @@ export const AIChatFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
                 <motion.div 
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
+                  transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                   className="flex justify-end"
                 >
                   <div className="bg-stone-900 text-white px-5 py-3 rounded-2xl rounded-tr-sm max-w-[80%] shadow-lg">
@@ -126,7 +126,7 @@ export const AIChatFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
                 <motion.div 
                    initial={{ opacity: 0, scale: 0.95 }}
                    whileInView={{ opacity: 1, scale: 1 }}
-                   transition={{ delay: 0.8, type: "spring", stiffness: 50 }}
+                   transition={{ delay: 0.8, type: "spring", stiffness: 40, damping: 10 }}
                    className="flex items-start gap-4"
                 >
                    <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 flex-shrink-0">

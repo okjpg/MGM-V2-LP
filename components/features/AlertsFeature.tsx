@@ -114,7 +114,7 @@ export const AlertsFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
           <motion.div
              initial={{ rotateY: 5, rotateX: 5, opacity: 0 }}
              whileInView={{ rotateY: 0, rotateX: 0, opacity: 1 }}
-             transition={{ duration: 0.8, ease: "easeOut" }}
+             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
              className="relative"
           >
             {/* Floating Badge */}
