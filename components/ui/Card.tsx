@@ -28,8 +28,8 @@ export const TactileButton: React.FC<{ children: React.ReactNode; primary?: bool
       onClick={onClick}
       className={`
         px-4 py-2 rounded-xl font-medium text-sm transition-colors
-        ${primary 
-          ? 'bg-brand-500 text-white shadow-lg shadow-brand-500/20 hover:bg-brand-600' 
+        ${primary
+          ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/20 hover:bg-orange-600'
           : 'bg-white border border-stone-200 text-stone-600 hover:bg-stone-50 hover:text-stone-900 shadow-sm'}
         ${className}
       `}

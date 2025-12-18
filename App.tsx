@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, Layout, ArrowRight, PlayCircle, ChevronRight } from 'lucide-react';
+import { AnimatedShinyText } from './components/ui/AnimatedShinyText';
 import { DashboardHero } from './components/features/DashboardHero';
 import { SummariesFeature } from './components/features/SummariesFeature';
 import { AlertsFeature } from './components/features/AlertsFeature';
@@ -164,16 +165,19 @@ export const HeroSection = ({ lang, setLang }: { lang: Language, setLang: (l: La
         <div className="max-w-5xl mx-auto text-center flex flex-col items-center">
 
           {/* Announcement Pill */}
-          <motion.div
+          <motion.a
+            href="#analytics"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-stone-200 shadow-sm text-xs font-semibold text-stone-600 mb-8 hover:border-orange-200 hover:bg-orange-50/50 transition-colors cursor-pointer group"
+            className="inline-flex items-center gap-2 px-1 py-1 pr-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm mb-8 cursor-pointer hover:shadow-md hover:bg-white/40 transition-all group"
           >
-            <span className="bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold shadow-sm">NEW</span>
-            <span className="group-hover:text-stone-900 transition-colors">{t.new}</span>
-            <ChevronRight size={12} className="text-stone-400 group-hover:translate-x-0.5 transition-transform" />
-          </motion.div>
+            <span className="bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">NEW</span>
+            <AnimatedShinyText className="inline-flex items-center gap-1 text-sm font-medium">
+              {t.new}
+            </AnimatedShinyText>
+            <ChevronRight size={14} className="text-stone-400 group-hover:translate-x-0.5 transition-transform" />
+          </motion.a>
 
           {/* Headline with Gradual Spacing and Highlight */}
           <GradualSpacing
@@ -235,7 +239,7 @@ export const HeroSection = ({ lang, setLang }: { lang: Language, setLang: (l: La
 
 export default function App() {
   const [lang, setLang] = useState<Language>('pt');
-  const [currentPage, setCurrentPage] = useState<'home' | 'analytics'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'analytics' | 'timeline'>('home');
 
   const t = content[lang];
 
@@ -245,6 +249,9 @@ export default function App() {
       const hash = window.location.hash;
       if (hash === '#analytics') {
         setCurrentPage('analytics');
+        window.scrollTo(0, 0);
+      } else if (hash === '#timeline') {
+        setCurrentPage('timeline');
         window.scrollTo(0, 0);
       } else {
         setCurrentPage('home');
@@ -265,13 +272,22 @@ export default function App() {
     window.location.hash = '';
   };
 
-  // Lazy load AnalyticsLP
+  // Lazy load pages
   const AnalyticsLP = React.lazy(() => import('./components/pages/AnalyticsLP').then(m => ({ default: m.AnalyticsLP })));
+  const TimelineMGM = React.lazy(() => import('./components/pages/TimelineMGM').then(m => ({ default: m.TimelineMGM })));
 
   if (currentPage === 'analytics') {
     return (
       <React.Suspense fallback={<div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center"><div className="animate-pulse text-stone-400">Loading...</div></div>}>
         <AnalyticsLP lang={lang} onBack={navigateToHome} setLang={setLang} />
+      </React.Suspense>
+    );
+  }
+
+  if (currentPage === 'timeline') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center"><div className="animate-pulse text-stone-400">Loading...</div></div>}>
+        <TimelineMGM lang={lang} onBack={navigateToHome} setLang={setLang} />
       </React.Suspense>
     );
   }
@@ -326,17 +342,99 @@ export default function App() {
         <section className="py-24 px-4">
           <ScrollReveal>
             <div className="max-w-5xl mx-auto bg-stone-900 rounded-[2.5rem] p-8 md:p-24 text-center relative overflow-hidden shadow-2xl">
-              <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-500/30 blur-[100px] rounded-full"></div>
+              {/* Noise texture */}
+              <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15] pointer-events-none" />
+
+              {/* Rotating Logo Background - Ultra Modern */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                {/* Outer slow rotation */}
+                <motion.div
+                  className="absolute w-[500px] h-[500px] md:w-[700px] md:h-[700px]"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 180, repeat: Infinity, ease: "linear" }}
+                >
+                  <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <defs>
+                      <linearGradient id="ctaGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#f97316" stopOpacity="0.08" />
+                        <stop offset="100%" stopColor="#ea580c" stopOpacity="0.03" />
+                      </linearGradient>
+                    </defs>
+                    {/* Dashboard grid pattern */}
+                    <rect x="35" y="35" width="30" height="30" rx="6" fill="url(#ctaGrad1)" />
+                    <rect x="10" y="35" width="20" height="20" rx="4" fill="url(#ctaGrad1)" />
+                    <rect x="70" y="35" width="20" height="20" rx="4" fill="url(#ctaGrad1)" />
+                    <rect x="35" y="10" width="20" height="20" rx="4" fill="url(#ctaGrad1)" />
+                    <rect x="35" y="70" width="20" height="20" rx="4" fill="url(#ctaGrad1)" />
+                    {/* Corner accents */}
+                    <rect x="12" y="12" width="12" height="12" rx="3" fill="url(#ctaGrad1)" />
+                    <rect x="76" y="12" width="12" height="12" rx="3" fill="url(#ctaGrad1)" />
+                    <rect x="12" y="76" width="12" height="12" rx="3" fill="url(#ctaGrad1)" />
+                    <rect x="76" y="76" width="12" height="12" rx="3" fill="url(#ctaGrad1)" />
+                  </svg>
+                </motion.div>
+
+                {/* Inner counter rotation */}
+                <motion.div
+                  className="absolute w-[350px] h-[350px] md:w-[500px] md:h-[500px]"
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 240, repeat: Infinity, ease: "linear" }}
+                >
+                  <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <defs>
+                      <linearGradient id="ctaGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.06" />
+                        <stop offset="100%" stopColor="#ffffff" stopOpacity="0.02" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="40" y="40" width="20" height="20" rx="4" fill="url(#ctaGrad2)" />
+                    <rect x="20" y="25" width="15" height="15" rx="3" fill="url(#ctaGrad2)" />
+                    <rect x="65" y="25" width="15" height="15" rx="3" fill="url(#ctaGrad2)" />
+                    <rect x="20" y="60" width="15" height="15" rx="3" fill="url(#ctaGrad2)" />
+                    <rect x="65" y="60" width="15" height="15" rx="3" fill="url(#ctaGrad2)" />
+                  </svg>
+                </motion.div>
+
+                {/* Breathing center glow */}
+                <motion.div
+                  className="absolute w-64 h-64 md:w-96 md:h-96 rounded-full"
+                  style={{
+                    background: 'radial-gradient(circle, rgba(249,115,22,0.25) 0%, rgba(249,115,22,0.1) 30%, transparent 70%)'
+                  }}
+                  animate={{
+                    scale: [1, 1.15, 1],
+                    opacity: [0.6, 0.8, 0.6]
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+
+                {/* Secondary pulse ring */}
+                <motion.div
+                  className="absolute w-48 h-48 md:w-72 md:h-72 rounded-full border border-orange-500/10"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.3, 0, 0.3]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeOut"
+                  }}
+                />
+              </div>
 
               <div className="relative z-10">
                 <h2 className="text-3xl md:text-6xl font-bold text-white mb-6 md:mb-8 tracking-tight">{t.footer.title}</h2>
                 <p className="text-lg md:text-xl text-stone-400 mb-8 md:mb-10 max-w-2xl mx-auto">{t.footer.desc}</p>
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="bg-white text-stone-900 px-8 py-4 md:px-10 md:py-5 rounded-2xl font-bold text-lg hover:bg-stone-100 transition-colors shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] w-full md:w-auto"
+                  whileHover={{ scale: 1.02, boxShadow: '0 0 50px -5px rgba(255,255,255,0.4)' }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="bg-white text-stone-900 px-8 py-4 md:px-10 md:py-5 rounded-2xl font-bold text-lg hover:bg-stone-50 transition-colors shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] w-full md:w-auto"
                 >
                   {t.footer.cta}
                 </motion.button>
@@ -364,8 +462,8 @@ export default function App() {
                 <h4 className="text-stone-900 font-bold mb-6">{t.footer.product}</h4>
                 <ul className="space-y-4">
                   <li><a href="#features" className="hover:text-orange-600 transition-colors">Features</a></li>
-                  <li><a href="#" className="hover:text-orange-600 transition-colors">Integrations</a></li>
                   <li><a href="#pricing" className="hover:text-orange-600 transition-colors">Pricing</a></li>
+                  <li><a href="#timeline" className="hover:text-orange-600 transition-colors">Timeline MGM</a></li>
                 </ul>
               </div>
               <div>

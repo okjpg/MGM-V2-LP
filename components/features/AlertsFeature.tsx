@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ScrollReveal } from '../ui/ScrollReveal';
 
 const AlertRow = ({ severity, title, time, active, onClick, alertDesc }: any) => (
-  <motion.div 
+  <motion.div
     layout
     onClick={onClick}
     className={`p-4 rounded-xl border mb-3 cursor-pointer transition-all ${active ? 'bg-white border-rose-200 shadow-lg ring-1 ring-rose-500/20' : 'bg-stone-50/50 border-stone-100 hover:bg-white hover:border-stone-200'}`}
@@ -72,53 +72,51 @@ export const AlertsFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
   return (
     <div className="py-24 max-w-7xl mx-auto px-4 md:px-8">
       <div className="flex flex-col lg:flex-row gap-16 items-center">
-        
+
         {/* Text Side - Left */}
         <div className="lg:w-1/2 space-y-8">
           <ScrollReveal>
-             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-bold uppercase tracking-wide border border-rose-100">
-               <ShieldAlert size={14} />
-               <span>{t.badge}</span>
-             </div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-bold uppercase tracking-wide border border-rose-100">
+              <ShieldAlert size={14} />
+              <span>{t.badge}</span>
+            </div>
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
-             <h2 className="text-4xl md:text-5xl font-bold text-stone-900 leading-tight">
-               {t.title} <span className="text-rose-500">{t.titleHighlight}</span>.
-             </h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-stone-900 leading-tight">
+              {t.title} <span className="text-rose-500">{t.titleHighlight}</span>.
+            </h2>
           </ScrollReveal>
 
           <ScrollReveal delay={0.2}>
-             <p className="text-lg text-stone-600 leading-relaxed">
-               {t.description}
-             </p>
+            <p className="text-lg text-stone-600 leading-relaxed">
+              {t.description}
+            </p>
           </ScrollReveal>
 
           <ScrollReveal delay={0.3}>
             <div className="flex gap-4 pt-2">
-               {t.checks.map((check: string, i: number) => (
-                  <div key={i} className="flex items-center gap-2 text-stone-700 font-medium text-sm">
-                    <CheckCircle2 size={16} className="text-rose-500" />
-                    <span>{check}</span>
-                  </div>
-               ))}
+              {t.checks.map((check: string, i: number) => (
+                <div key={i} className="flex items-center gap-2 text-stone-700 font-medium text-sm">
+                  <CheckCircle2 size={16} className="text-rose-500" />
+                  <span>{check}</span>
+                </div>
+              ))}
             </div>
-             <div className="pt-6">
-               <TactileButton>{t.btn}</TactileButton>
-             </div>
+
           </ScrollReveal>
         </div>
 
         {/* Mockup Side - Right */}
         <div className="lg:w-1/2 w-full perspective-1000">
           <motion.div
-             initial={{ rotateY: 5, rotateX: 5, opacity: 0 }}
-             whileInView={{ rotateY: 0, rotateX: 0, opacity: 1 }}
-             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-             className="relative"
+            initial={{ rotateY: 5, rotateX: 5, opacity: 0 }}
+            whileInView={{ rotateY: 0, rotateX: 0, opacity: 1 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className="relative"
           >
             {/* Floating Badge */}
-            <motion.div 
+            <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               className="absolute -top-6 -right-6 z-20 bg-rose-500 text-white p-4 rounded-2xl shadow-xl shadow-rose-500/30 hidden md:block"
@@ -127,38 +125,38 @@ export const AlertsFeature: React.FC<{ lang: 'en' | 'pt' }> = ({ lang }) => {
             </motion.div>
 
             <Card className="min-h-[400px] bg-white/50 backdrop-blur-sm border-stone-200/60 p-6 relative overflow-hidden">
-               <div className="flex items-center justify-between mb-8">
-                 <h3 className="font-bold text-stone-800 flex items-center gap-2">
-                   <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                   {t.monitorTitle}
-                 </h3>
-                 <div className="text-xs bg-stone-100 px-2 py-1 rounded text-stone-500">{t.updates}</div>
-               </div>
+              <div className="flex items-center justify-between mb-8">
+                <h3 className="font-bold text-stone-800 flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                  {t.monitorTitle}
+                </h3>
+                <div className="text-xs bg-stone-100 px-2 py-1 rounded text-stone-500">{t.updates}</div>
+              </div>
 
-               <div className="space-y-2">
-                  <AlertRow title={t.mockAlerts[0].title} time={t.mockAlerts[0].time} alertDesc={t.mockAlerts[0].desc} severity="critical" active={activeTab === 0} onClick={() => setActiveTab(0)} />
-                  <AlertRow title={t.mockAlerts[1].title} time={t.mockAlerts[1].time} alertDesc={t.mockAlerts[1].desc} severity="medium" active={activeTab === 1} onClick={() => setActiveTab(1)} />
-                  <AlertRow title={t.mockAlerts[2].title} time={t.mockAlerts[2].time} alertDesc={t.mockAlerts[2].desc} severity="low" active={activeTab === 2} onClick={() => setActiveTab(2)} />
-               </div>
+              <div className="space-y-2">
+                <AlertRow title={t.mockAlerts[0].title} time={t.mockAlerts[0].time} alertDesc={t.mockAlerts[0].desc} severity="critical" active={activeTab === 0} onClick={() => setActiveTab(0)} />
+                <AlertRow title={t.mockAlerts[1].title} time={t.mockAlerts[1].time} alertDesc={t.mockAlerts[1].desc} severity="medium" active={activeTab === 1} onClick={() => setActiveTab(1)} />
+                <AlertRow title={t.mockAlerts[2].title} time={t.mockAlerts[2].time} alertDesc={t.mockAlerts[2].desc} severity="low" active={activeTab === 2} onClick={() => setActiveTab(2)} />
+              </div>
 
-               {/* Active Alert Detail */}
-               <motion.div 
-                 key={activeTab}
-                 initial={{ opacity: 0, y: 10 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 className="mt-6 p-4 bg-rose-50 rounded-xl border border-rose-100"
-               >
-                  <div className="flex items-center gap-2 mb-2 text-rose-700 text-xs font-bold uppercase tracking-wider">
-                    <ShieldAlert size={12} />
-                    <span>{t.detail.badge}</span>
-                  </div>
-                  <p className="text-sm text-stone-700 mb-3">
-                    {t.detail.text} <strong>#{t.mockAlerts[0].title.toLowerCase().replace(' ', '-')}</strong>.
-                  </p>
-                  <button className="w-full py-2 bg-white border border-rose-200 text-rose-600 rounded-lg text-xs font-bold hover:bg-rose-100 transition-colors">
-                    {t.detail.btn}
-                  </button>
-               </motion.div>
+              {/* Active Alert Detail */}
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-6 p-4 bg-rose-50 rounded-xl border border-rose-100"
+              >
+                <div className="flex items-center gap-2 mb-2 text-rose-700 text-xs font-bold uppercase tracking-wider">
+                  <ShieldAlert size={12} />
+                  <span>{t.detail.badge}</span>
+                </div>
+                <p className="text-sm text-stone-700 mb-3">
+                  {t.detail.text} <strong>#{t.mockAlerts[0].title.toLowerCase().replace(' ', '-')}</strong>.
+                </p>
+                <button className="w-full py-2 bg-white border border-rose-200 text-rose-600 rounded-lg text-xs font-bold hover:bg-rose-100 transition-colors">
+                  {t.detail.btn}
+                </button>
+              </motion.div>
             </Card>
           </motion.div>
         </div>

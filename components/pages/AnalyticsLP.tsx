@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useMotionValue, useSpring, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
     TrendingUp,
     Users,
@@ -18,39 +18,14 @@ import {
     CheckCircle2,
     Smile,
     UserCheck,
-    Bell
+    Bell,
+    ChevronRight
 } from 'lucide-react';
 import { Logo } from '../../App';
 import { Language } from '../../App';
 import { SpiralAnimation } from '../animations/SpiralAnimation';
 import { PricingFeature } from '../features/PricingFeature';
-
-// Helper for animated numbers
-const AnimatedCounter = ({ value, suffix = '', decimals = 0 }: { value: number, suffix?: string, decimals?: number }) => {
-    const motionValue = useMotionValue(0);
-    const springValue = useSpring(motionValue, { damping: 30, stiffness: 100 });
-    const [displayValue, setDisplayValue] = React.useState(0);
-    const ref = React.useRef(null);
-    const isInView = useInView(ref, { once: true });
-
-    React.useEffect(() => {
-        if (isInView) {
-            motionValue.set(value);
-        }
-    }, [isInView, value, motionValue]);
-
-    React.useEffect(() => {
-        return springValue.on("change", (latest) => {
-            setDisplayValue(latest);
-        });
-    }, [springValue]);
-
-    return (
-        <span ref={ref}>
-            {displayValue.toFixed(decimals)}{suffix}
-        </span>
-    );
-};
+import { AnimatedShinyText } from '../ui/AnimatedShinyText';
 
 // Mini chart components for visual appeal
 const MiniDonutChart = ({ value, color = 'orange' }: { value: number, color?: string }) => {
@@ -258,6 +233,14 @@ const content = {
 export const AnalyticsLP = ({ lang, onBack, setLang }: { lang: Language, onBack: () => void, setLang?: (l: Language) => void }) => {
     const t = content[lang];
 
+    const [scrolled, setScrolled] = React.useState(false);
+
+    React.useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     const menuItems = [
         { name: lang === 'en' ? 'Home' : 'Início', href: '#features', onClick: onBack },
         { name: 'Analytics 2.0', href: '#analytics', onClick: () => window.scrollTo(0, 0) },
@@ -267,7 +250,7 @@ export const AnalyticsLP = ({ lang, onBack, setLang }: { lang: Language, onBack:
     return (
         <div className="min-h-screen bg-[#FDFBF7]">
             {/* Header - Same as main page */}
-            <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-stone-200/50 py-3">
+            <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md border-b border-stone-200/50 py-3' : 'bg-transparent py-5'}`}>
                 <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                     <button onClick={onBack} className="flex items-center gap-2 z-50 relative hover:opacity-70 transition-opacity">
                         <Logo />
@@ -322,13 +305,27 @@ export const AnalyticsLP = ({ lang, onBack, setLang }: { lang: Language, onBack:
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className="text-center"
                     >
+                        <motion.a
+                            href="#analytics"
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2, duration: 0.6 }}
+                            className="inline-flex items-center gap-2 px-1 py-1 pr-3 rounded-full bg-white/30 backdrop-blur-md border border-white/40 shadow-sm mb-6 cursor-pointer hover:shadow-md hover:bg-white/40 transition-all group"
+                        >
+                            <span className="bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">NEW</span>
+                            <AnimatedShinyText className="inline-flex items-center gap-1 text-sm font-medium">
+                                {lang === 'en' ? 'MGM AI 2.0 is now live' : 'MGM AI 2.0 está no ar'}
+                            </AnimatedShinyText>
+                            <ChevronRight size={14} className="text-stone-400 group-hover:translate-x-0.5 transition-transform" />
+                        </motion.a>
+
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3, duration: 0.8 }}
                             className="text-5xl md:text-7xl lg:text-8xl font-bold text-stone-900 mb-4 tracking-tight"
                         >
-                            My Group Metrics
+                            My Group Metrics <span className="text-stone-400">(MGM)</span>
                         </motion.h1>
 
                         <motion.div
@@ -337,8 +334,7 @@ export const AnalyticsLP = ({ lang, onBack, setLang }: { lang: Language, onBack:
                             transition={{ delay: 0.5, duration: 0.6 }}
                             className="flex items-center justify-center gap-3"
                         >
-                            <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-orange-500">(MGM)</span>
-                            <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-stone-700">IA 2.0</span>
+                            <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-orange-500">IA 2.0</span>
                         </motion.div>
 
                         <motion.p
@@ -448,10 +444,11 @@ export const AnalyticsLP = ({ lang, onBack, setLang }: { lang: Language, onBack:
                                 <div className="w-10 h-10 rounded-2xl bg-white border border-purple-100 shadow-sm flex items-center justify-center mb-3">
                                     <MessageSquare className="text-purple-500" size={20} />
                                 </div>
-                                <div className="text-4xl font-bold text-stone-900 mb-1 tracking-tight">
-                                    <AnimatedCounter value={12.4} suffix="K" decimals={1} />
-                                </div>
-                                <div className="text-sm font-medium text-stone-500">{t.cards.messages.title}</div>
+                                <div className="text-3xl font-bold text-stone-900 mb-1">{t.cards.messages.value}</div>
+                                <div className="text-sm font-medium text-stone-900">{t.cards.messages.title}</div>
+                            </div>
+                            <div className="flex-1 ml-8">
+                                <MiniBarChart data={[45, 70, 55, 80, 65, 90, 75, 85, 60, 95]} />
                             </div>
                         </div>
                         <div className="text-xs text-stone-400">{t.cards.messages.desc}</div>
@@ -525,12 +522,11 @@ export const AnalyticsLP = ({ lang, onBack, setLang }: { lang: Language, onBack:
                             <div className="w-10 h-10 rounded-2xl bg-white border border-violet-100 shadow-sm flex items-center justify-center">
                                 <MessageSquare className="text-violet-500" size={16} />
                             </div>
-                            <div className="text-sm font-bold text-stone-900 tracking-tight">{lang === 'en' ? 'Group Messages' : 'Mensagens de Grupo'}</div>
+                            <div className="text-sm font-medium text-stone-900">{lang === 'en' ? 'Group Messages' : 'Mensagens de Grupo'}</div>
                         </div>
-                        <div className="text-4xl font-bold text-stone-900 mb-2 tracking-tight">
-                            <AnimatedCounter value={72} />
-                        </div>
+                        <div className="text-4xl font-bold text-stone-900 mb-2">72</div>
                         <div className="text-xs text-stone-400 mb-4">{lang === 'en' ? 'Messages today' : 'Mensagens hoje'}</div>
+                        <MiniBarChart data={[30, 45, 60, 40, 72, 55, 65]} />
                     </BentoCard>
 
                     {/* Row 2: Top Members & Heatmap */}
