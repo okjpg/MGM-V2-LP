@@ -492,8 +492,8 @@ export const TimelineMGM = ({ lang, onBack, setLang }: { lang: Language; onBack:
         </motion.div>
       </section>
 
-      {/* MGM 1.0 Video Section */}
-      <section className="px-4 md:px-8 pb-24 bg-gradient-to-b from-[#FDFBF7] to-stone-100">
+      {/* MGM 1.0 Video Section - The Journey */}
+      <section className="px-4 md:px-8 pb-24 bg-gradient-to-b from-[#FDFBF7] to-stone-50">
         <div className="max-w-5xl mx-auto">
           {/* Section Header */}
           <motion.div
@@ -507,13 +507,13 @@ export const TimelineMGM = ({ lang, onBack, setLang }: { lang: Language; onBack:
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 border border-orange-200 text-orange-700 text-sm font-bold mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-stone-100 border border-stone-200 text-stone-600 text-sm font-bold mb-6"
             >
-              <Rocket size={14} />
-              {lang === 'en' ? 'NEW CHAPTER' : 'NOVO CAPÍTULO'}
+              <Play size={14} />
+              {lang === 'en' ? 'THE JOURNEY' : 'A JORNADA'}
             </motion.div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-stone-900 mb-4 tracking-tight">
-              MGM <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">1.0</span>
+              MGM <span className="text-stone-400">1.0</span>
             </h2>
             <p className="text-stone-500 text-lg md:text-xl max-w-2xl mx-auto">
               {lang === 'en'
@@ -530,13 +530,10 @@ export const TimelineMGM = ({ lang, onBack, setLang }: { lang: Language; onBack:
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="relative group"
           >
-            {/* Glow effect behind */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-orange-500/20 via-amber-500/20 to-orange-500/20 rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
             {/* Video container */}
             <div className="relative bg-stone-900 rounded-[2rem] overflow-hidden shadow-2xl shadow-stone-900/20">
               {/* Decorative top bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-stone-600 via-stone-500 to-stone-600" />
 
               {/* YouTube Embed */}
               <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
@@ -552,7 +549,7 @@ export const TimelineMGM = ({ lang, onBack, setLang }: { lang: Language; onBack:
               {/* Bottom info bar */}
               <div className="bg-stone-900 px-6 py-4 flex items-center justify-between border-t border-stone-800">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center">
+                  <div className="w-10 h-10 bg-stone-700 rounded-xl flex items-center justify-center">
                     <Play size={16} className="text-white ml-0.5" fill="white" />
                   </div>
                   <div>
@@ -569,6 +566,120 @@ export const TimelineMGM = ({ lang, onBack, setLang }: { lang: Language; onBack:
                   <span>{lang === 'en' ? 'Watch on YouTube' : 'Ver no YouTube'}</span>
                   <ArrowRight size={14} />
                 </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* MGM 2.0 - New Era Section */}
+      <section className="px-4 md:px-8 py-24 bg-stone-50 relative overflow-hidden">
+        {/* Background elements */}
+        <div className="absolute inset-0 bg-[radial-gradient(#e7e5e4_1px,transparent_1px)] bg-[size:32px_32px] opacity-50" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-orange-500/10 to-transparent rounded-full blur-[100px]" />
+
+        <div className="max-w-5xl mx-auto relative z-10">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white text-sm font-bold mb-6 shadow-lg shadow-orange-500/25"
+            >
+              <Sparkles size={14} />
+              {lang === 'en' ? 'NEW CHAPTER' : 'NOVO CAPÍTULO'}
+            </motion.div>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-stone-900 mb-6 tracking-tight">
+              {lang === 'en' ? 'Welcome to' : 'Bem-vindo ao'}{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600">
+                MGM 2.0
+              </span>
+            </h2>
+            <p className="text-stone-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+              {lang === 'en'
+                ? 'After the journey from R$0 to R$100k, we\'re entering a new era. A completely rebuilt platform, designed to be the definitive tool for community intelligence.'
+                : 'Depois da jornada de R$0 a R$100k, estamos entrando em uma nova era. Uma plataforma completamente reconstruída, projetada para ser a ferramenta definitiva de inteligência de comunidades.'}
+            </p>
+          </motion.div>
+
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {[
+              {
+                icon: Brain,
+                title: lang === 'en' ? 'AI-First' : 'IA em Primeiro Lugar',
+                desc: lang === 'en' ? 'Powered by the latest AI models to deliver insights that truly matter.' : 'Alimentado pelos modelos de IA mais recentes para entregar insights que realmente importam.'
+              },
+              {
+                icon: BarChart3,
+                title: lang === 'en' ? 'Deep Analytics' : 'Analytics Profundo',
+                desc: lang === 'en' ? 'Understand your community like never before with granular data visualization.' : 'Entenda sua comunidade como nunca antes com visualização granular de dados.'
+              },
+              {
+                icon: Zap,
+                title: lang === 'en' ? 'Real-time' : 'Tempo Real',
+                desc: lang === 'en' ? 'Instant alerts and live dashboards to never miss a critical moment.' : 'Alertas instantâneos e dashboards ao vivo para nunca perder um momento crítico.'
+              }
+            ].map((feature, i) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm hover:shadow-xl hover:border-orange-200 transition-all duration-300 group"
+              >
+                <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-amber-100 rounded-xl flex items-center justify-center mb-4 group-hover:from-orange-200 group-hover:to-amber-200 transition-colors">
+                  <feature.icon className="text-orange-600" size={24} />
+                </div>
+                <h3 className="text-lg font-bold text-stone-900 mb-2">{feature.title}</h3>
+                <p className="text-stone-500 text-sm leading-relaxed">{feature.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* CTA Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative"
+          >
+            <div className="absolute -inset-2 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 rounded-[2rem] blur-xl opacity-20" />
+            <div className="relative bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 rounded-[1.5rem] p-8 md:p-12 text-center overflow-hidden">
+              {/* Noise */}
+              <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
+
+              {/* Glow */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-orange-500/20 blur-[100px] rounded-full" />
+
+              <div className="relative z-10">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                  {lang === 'en' ? 'Be among the first to experience MGM 2.0' : 'Seja um dos primeiros a experimentar o MGM 2.0'}
+                </h3>
+                <p className="text-stone-400 mb-8 max-w-xl mx-auto">
+                  {lang === 'en'
+                    ? 'We\'re building the future of community management. Join the waitlist and get early access.'
+                    : 'Estamos construindo o futuro da gestão de comunidades. Entre na lista de espera e tenha acesso antecipado.'}
+                </p>
+                <motion.button
+                  whileHover={{ scale: 1.02, boxShadow: "0 20px 40px -10px rgba(249, 115, 22, 0.4)" }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => window.location.hash = ''}
+                  className="h-14 px-10 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold hover:from-orange-600 hover:to-amber-600 transition-all flex items-center gap-3 mx-auto shadow-xl shadow-orange-500/25"
+                >
+                  {lang === 'en' ? 'Explore MGM 2.0' : 'Explorar MGM 2.0'}
+                  <ArrowRight size={18} />
+                </motion.button>
               </div>
             </div>
           </motion.div>
