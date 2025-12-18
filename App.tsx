@@ -86,11 +86,15 @@ Button.displayName = "Button";
 // --- Logo Component ---
 export const Logo = ({ className }: { className?: string }) => {
   return (
-    <div className={cn("flex items-center gap-2", className)}>
-      <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-orange-500/20">
-        <Layout size={18} fill="currentColor" stroke="none" />
+    <div className={cn("flex items-center gap-2 group", className)}>
+      <div className="relative w-10 h-10 flex items-center justify-center rounded-xl overflow-hidden bg-stone-100/50 shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:shadow-md">
+        <img
+          src="/logo.png"
+          alt="MGM Logo"
+          className="w-full h-full object-cover mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity"
+        />
       </div>
-      <span className="font-bold text-xl tracking-tight text-stone-900">MGM</span>
+      <span className="font-bold text-xl tracking-tight text-stone-900 group-hover:text-orange-600 transition-colors">MGM</span>
     </div>
   )
 }
@@ -448,11 +452,8 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-4 md:px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
               <div className="col-span-1 md:col-span-2">
-                <div className="flex items-center gap-2 mb-6 text-stone-900">
-                  <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-white">
-                    <Layout size={18} fill="currentColor" stroke="none" />
-                  </div>
-                  <span className="font-bold text-xl tracking-tight">MGM</span>
+                <div className="mb-6">
+                  <Logo />
                 </div>
                 <p className="max-w-sm text-lg font-light">
                   The operating system for modern communities. <br />Built for calmness in a chaotic world.

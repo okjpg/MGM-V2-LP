@@ -12,53 +12,69 @@ const content = {
       badge: 'Our Journey',
       title: 'Timeline',
       titleHighlight: 'MGM',
-      subtitle: 'Follow our evolution from idea to the leading community intelligence platform.',
-      cta: 'Start Free Trial',
+      subtitle: 'From a pain point in a Telegram community to a complete platform for community intelligence.',
+      cta: 'Book a Demo',
       stats: [
-        { value: '10K+', label: 'Active Users' },
-        { value: '50K+', label: 'Communities' },
-        { value: '99.9%', label: 'Uptime' }
+        { value: '280+', label: 'Groups in 1st month' },
+        { value: '200k+', label: 'Messages/month' },
+        { value: 'R$1.5k', label: 'MRR' }
       ]
     },
     timeline: [
       {
-        title: '2023',
+        title: 'The Pain',
         items: [
-          { title: 'The Beginning', desc: 'MGM was born from a simple idea: communities deserve better tools to understand their members.', icon: Sparkles },
-          { title: 'First Beta', desc: 'We launched our first beta version with basic analytics for WhatsApp groups.', icon: Rocket },
-          { title: '100 Users', desc: 'Reached our first 100 active users, validating the market need.', icon: Users }
+          { title: 'Scratch your own itch', desc: 'The pain emerged when the open Telegram community hit ~1k members. 400-500 messages were written there per day! The more the group grew, the lower the member engagement.', icon: MessageSquare },
+          { title: 'The Idea', desc: 'Create a summary of the main topics and send it via email to members. This would generate value: member engagement (+retention), and the ability to capture emails from the open community.', icon: Sparkles },
+          { title: 'Finding a Tech Partner', desc: 'Bruno threw the idea in the community group and André Prado accepted the challenge. The partnership was born.', icon: Users }
         ]
       },
       {
-        title: '2024 Q1',
+        title: 'MVP v1',
         items: [
-          { title: 'AI Integration', desc: 'Introduced our first AI-powered features for sentiment analysis.', icon: Brain },
-          { title: 'Dashboard 2.0', desc: 'Complete redesign of our analytics dashboard with real-time data.', icon: BarChart3 },
-          { title: '1,000 Communities', desc: 'Milestone: 1,000 communities actively using MGM.', icon: Target }
+          { title: 'ByteTalk is born', desc: 'A bot that summarizes daily conversations and sends the summary to members. Built in just 2 days with free infrastructure.', icon: Rocket },
+          { title: 'Viral Growth', desc: 'In 1 month, the bot reached 280 groups. On average, 8k messages were summarized per day (+200k per month). The cost kept increasing!', icon: TrendingUp },
+          { title: 'First Revenue', desc: 'We charged R$5 for people to receive summaries privately. We made R$300 MRR testing. But customer growth wasnt proportional to the number of leads.', icon: Star }
         ]
       },
       {
-        title: '2024 Q2',
+        title: 'Validation',
         items: [
-          { title: 'Churn Prediction', desc: 'Launched predictive analytics to identify members at risk of leaving.', icon: TrendingUp },
-          { title: 'Multi-platform', desc: 'Expanded beyond WhatsApp to support Telegram and Discord.', icon: Globe },
-          { title: 'Enterprise Plans', desc: 'Introduced enterprise solutions for large organizations.', icon: Star }
+          { title: 'Separating wheat from chaff', desc: 'We turned off the bot in several random groups to discover who would raise their hand. We interviewed people who showed interest to understand their demands.', icon: Target },
+          { title: 'Discovering the ICP', desc: 'We observed 2 profiles: Community owners (especially paid ones) and Infoproducers. We offered R$38-48 to reactivate the tool.', icon: Users },
+          { title: 'Key Insights', desc: 'All competitors had very inferior solutions. As first movers in a new market, we had flexibility to set the price we wanted.', icon: Brain }
         ]
       },
       {
-        title: '2024 Q3',
+        title: 'Alfa Version',
         items: [
-          { title: 'Workflows', desc: 'Automated workflows to help community managers save time.', icon: Zap },
-          { title: 'API Launch', desc: 'Public API for developers to build integrations.', icon: Code },
-          { title: '10K Users', desc: 'Reached 10,000 active users across the platform.', icon: Users }
+          { title: 'Value Proposition', desc: 'After 2-3 weeks of interviews, the value proposition became clear: RETENTION AND ENGAGEMENT. We decided to transform the bot into a SaaS.', icon: Sparkles },
+          { title: 'MVP v2 - The SaaS', desc: 'Real-time dashboard for community owners to analytically see everything happening in their group. Main features: topic summaries, most engaged members, hottest topics.', icon: BarChart3 },
+          { title: 'Beta Testers', desc: '"Holy sh*t, what an amazing dashboard!! Youre giving me GOLD in community management." - First beta tester feedback. Signal that we were heading in the right direction.', icon: Zap }
         ]
       },
       {
-        title: '2025',
+        title: 'Beta Version',
         items: [
-          { title: 'MGM AI 2.0', desc: 'Revolutionary AI assistant that understands context and provides actionable insights.', icon: Brain },
-          { title: 'Real-time Alerts', desc: 'Instant notifications for important community events.', icon: Bell },
-          { title: 'The Future', desc: 'Continuing to innovate and empower community builders worldwide.', icon: Rocket }
+          { title: 'Pricing Structure', desc: 'R$99 for Alfa, R$179 for Beta, R$299 for Go Live. We created a price ladder based on number of members (Value Metric).', icon: Star },
+          { title: 'First Subscriber', desc: 'The first subscriber came from referral, not from the group! We launched pricing via WhatsApp and our landing page in the same week.', icon: Rocket },
+          { title: 'Reaching R$1k MRR', desc: 'Immediate increase of R$500 MRR. But then came high churn (~50%). The value proposition wasnt clear to customers.', icon: TrendingUp }
+        ]
+      },
+      {
+        title: 'Refinement',
+        items: [
+          { title: 'Value Metric', desc: 'We defined engagement: a person who sent or reacted to 5 messages in the WhatsApp group within 5 days. The more interactions, the higher the engagement.', icon: Target },
+          { title: 'Time to Value', desc: '3 critical points: put bot in group, schedule a message, receive weekly engagement report. After implementing focused onboarding, churn dropped immediately.', icon: Zap },
+          { title: 'Bubble + API', desc: 'We outsourced frontend to Bubble with Felipe Raitano. André built an API for total code control - essential for future sale.', icon: Code }
+        ]
+      },
+      {
+        title: 'Go Live',
+        items: [
+          { title: 'Upstairs Pricing', desc: 'Strategy of raising monthly price and keeping annual with discount. MRR went from R$1k to R$1.5k (50% increase) in a few days.', icon: TrendingUp },
+          { title: 'Sales Channels', desc: 'Priorities: partnerships with Micro-SaaS with same ICP, social media posts, paid traffic. Affiliates as parallel test.', icon: Globe },
+          { title: 'Competition Emerging', desc: 'Competitors appearing in the exact same market as our target audience. A good sign - validates market demand and gives "gas" to focus on sales.', icon: Users }
         ]
       }
     ],
@@ -69,53 +85,69 @@ const content = {
       badge: 'Nossa Jornada',
       title: 'Timeline',
       titleHighlight: 'MGM',
-      subtitle: 'Acompanhe nossa evolução de uma ideia até a plataforma líder em inteligência de comunidades.',
-      cta: 'Começar Grátis',
+      subtitle: 'De uma dor em uma comunidade do Telegram até uma plataforma completa de inteligência de comunidades.',
+      cta: 'Agendar Demo',
       stats: [
-        { value: '10K+', label: 'Usuários Ativos' },
-        { value: '50K+', label: 'Comunidades' },
-        { value: '99.9%', label: 'Uptime' }
+        { value: '280+', label: 'Grupos no 1º mês' },
+        { value: '200k+', label: 'Mensagens/mês' },
+        { value: 'R$1.5k', label: 'MRR' }
       ]
     },
     timeline: [
       {
-        title: '2023',
+        title: 'A Dor',
         items: [
-          { title: 'O Início', desc: 'MGM nasceu de uma ideia simples: comunidades merecem ferramentas melhores para entender seus membros.', icon: Sparkles },
-          { title: 'Primeiro Beta', desc: 'Lançamos nossa primeira versão beta com analytics básicos para grupos de WhatsApp.', icon: Rocket },
-          { title: '100 Usuários', desc: 'Alcançamos nossos primeiros 100 usuários ativos, validando a necessidade do mercado.', icon: Users }
+          { title: 'Scratch your own itch', desc: 'A dor surgiu quando a comunidade aberta no Telegram atingiu aproximadamente 1k de membros. Por ali, eram escritas entre 400-500 mensagens por dia! Quanto mais o grupo crescia, menor era o engajamento dos membros.', icon: MessageSquare },
+          { title: 'A Ideia', desc: 'Fazer um resumo dos principais assuntos e enviar por email para os membros. Isso geraria valor: engajamento dos membros (+retenção), e a possibilidade de captar e-mails da comunidade aberta.', icon: Sparkles },
+          { title: 'Encontrando um Parceiro Tech', desc: 'Bruno jogou a ideia no grupo da comunidade e o André Prado topou o desafio. A parceria nasceu.', icon: Users }
         ]
       },
       {
-        title: '2024 Q1',
+        title: 'MVP v1',
         items: [
-          { title: 'Integração com IA', desc: 'Introduzimos nossos primeiros recursos com IA para análise de sentimento.', icon: Brain },
-          { title: 'Dashboard 2.0', desc: 'Redesign completo do nosso dashboard de analytics com dados em tempo real.', icon: BarChart3 },
-          { title: '1.000 Comunidades', desc: 'Marco: 1.000 comunidades usando ativamente o MGM.', icon: Target }
+          { title: 'Nasce o ByteTalk', desc: 'Um bot que resume as conversas do dia e envia o resumo para os membros. Construído em apenas 2 dias com infra gratuita.', icon: Rocket },
+          { title: 'Crescimento Viral', desc: 'Em 1 mês, o bot chegou em 280 grupos. Em média, 8 mil mensagens eram resumidas por dia (+200k no mês). O custo não parava de aumentar!', icon: TrendingUp },
+          { title: 'Primeira Receita', desc: 'Cobramos R$5 para que as pessoas recebessem os resumos no privado. Faturamos R$300 de MRR testando. Mas o crescimento de clientes não foi proporcional ao número de leads.', icon: Star }
         ]
       },
       {
-        title: '2024 Q2',
+        title: 'Validação',
         items: [
-          { title: 'Previsão de Churn', desc: 'Lançamos analytics preditivos para identificar membros em risco de sair.', icon: TrendingUp },
-          { title: 'Multi-plataforma', desc: 'Expandimos além do WhatsApp para suportar Telegram e Discord.', icon: Globe },
-          { title: 'Planos Enterprise', desc: 'Introduzimos soluções enterprise para grandes organizações.', icon: Star }
+          { title: 'Separando o joio do trigo', desc: 'Desligamos o bot em vários grupos aleatórios para descobrir quem levantaria a mão. Entrevistamos pessoas interessadas para entender suas demandas.', icon: Target },
+          { title: 'Descobrindo o ICP', desc: 'Observamos 2 perfis: Donos de comunidades (principalmente pagas) e Infoprodutores. Oferecemos entre R$38 e R$48 para religar a ferramenta.', icon: Users },
+          { title: 'Insights Chave', desc: 'Todos os concorrentes tinham soluções muito inferiores. Como first movers de um mercado novo, tínhamos flexibilidade de definir o preço que desejássemos.', icon: Brain }
         ]
       },
       {
-        title: '2024 Q3',
+        title: 'Versão Alfa',
         items: [
-          { title: 'Workflows', desc: 'Workflows automatizados para ajudar gerentes de comunidade a economizar tempo.', icon: Zap },
-          { title: 'Lançamento da API', desc: 'API pública para desenvolvedores criarem integrações.', icon: Code },
-          { title: '10K Usuários', desc: 'Alcançamos 10.000 usuários ativos na plataforma.', icon: Users }
+          { title: 'Proposta de Valor', desc: 'Depois de 2-3 semanas entrevistando pessoas, ficou clara a proposta de valor: RETENÇÃO E ENGAJAMENTO. Decidimos transformar o bot em um SaaS.', icon: Sparkles },
+          { title: 'MVP v2 - O SaaS', desc: 'Painel em tempo real para donos de comunidades enxergarem de forma analítica tudo o que acontecia no grupo. Principais features: resumo de tópicos, membros mais engajados, assuntos mais quentes.', icon: BarChart3 },
+          { title: 'Beta Testers', desc: '"Caralho, que painel foda!! Vocês estão me entregando OURO em gestão de comunidade." - Feedback do primeiro beta tester. Sinal de que estávamos olhando para a direção certa.', icon: Zap }
         ]
       },
       {
-        title: '2025',
+        title: 'Versão Beta',
         items: [
-          { title: 'MGM AI 2.0', desc: 'Assistente de IA revolucionário que entende contexto e fornece insights acionáveis.', icon: Brain },
-          { title: 'Alertas em Tempo Real', desc: 'Notificações instantâneas para eventos importantes da comunidade.', icon: Bell },
-          { title: 'O Futuro', desc: 'Continuando a inovar e empoderar construtores de comunidades no mundo todo.', icon: Rocket }
+          { title: 'Estrutura de Preços', desc: 'R$99 para Alfa, R$179 para Beta, R$299 para Go Live. Criamos uma escada de preços baseada na quantidade de membros (Value Metric).', icon: Star },
+          { title: 'Primeiro Assinante', desc: 'O primeiro assinante veio de indicação, e não do grupo! Lançamos preço via WhatsApp e nossa landing page na mesma semana.', icon: Rocket },
+          { title: 'Chegando em R$1k MRR', desc: 'Aumento imediato de R$500 de MRR. Mas logo depois veio o churn alto (~50%). A proposta de valor não estava clara para os clientes.', icon: TrendingUp }
+        ]
+      },
+      {
+        title: 'Refinamento',
+        items: [
+          { title: 'Value Metric', desc: 'Definimos engajamento: pessoa que mandou ou reagiu a 5 mensagens no grupo do WhatsApp, no período de até 5 dias. Quanto mais interações, maior o engajamento.', icon: Target },
+          { title: 'Time to Value', desc: '3 pontos críticos: colocar bot no grupo, agendar uma mensagem, receber resumo semanal de engajamento. Depois de implementar onboarding focado, o churn caiu imediatamente.', icon: Zap },
+          { title: 'Bubble + API', desc: 'Terceirizamos o frontend para Bubble com o Felipe Raitano. O André construiu uma API para ter controle total do código - essencial para futura venda.', icon: Code }
+        ]
+      },
+      {
+        title: 'Go Live',
+        items: [
+          { title: 'Precificação Upstairs', desc: 'Estratégia de subir o preço mensal e manter o anual com desconto. MRR foi de R$1k para R$1.5k (50% de aumento) em alguns dias.', icon: TrendingUp },
+          { title: 'Canais de Vendas', desc: 'Prioridades: parcerias com Micro-SaaS com mesmo ICP, postagens em redes sociais, tráfego pago. Afiliados como teste paralelo.', icon: Globe },
+          { title: 'Concorrência Surgindo', desc: 'Concorrentes aparecendo no exato mesmo mercado que nosso público-alvo. Bom sinal - valida a demanda de mercado e dá "gás" para focar nas vendas.', icon: Users }
         ]
       }
     ],
