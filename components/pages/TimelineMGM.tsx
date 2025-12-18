@@ -12,7 +12,7 @@ const content = {
       badge: 'Our Journey',
       title: 'Timeline',
       titleHighlight: 'MGM',
-      subtitle: 'From a pain point in a Telegram community to a complete platform for community intelligence.',
+      subtitle: 'The story of how a personal frustration became a platform that helps thousands of communities.',
       cta: 'Book a Demo',
       stats: [
         { value: '280+', label: 'Groups in 1st month' },
@@ -24,57 +24,61 @@ const content = {
       {
         title: 'The Pain',
         items: [
-          { title: 'Scratch your own itch', desc: 'The pain emerged when the open Telegram community hit ~1k members. 400-500 messages were written there per day! The more the group grew, the lower the member engagement.', icon: MessageSquare },
-          { title: 'The Idea', desc: 'Create a summary of the main topics and send it via email to members. This would generate value: member engagement (+retention), and the ability to capture emails from the open community.', icon: Sparkles },
-          { title: 'Finding a Tech Partner', desc: 'Bruno threw the idea in the community group and André Prado accepted the challenge. The partnership was born.', icon: Users }
+          { title: 'When it all started', desc: 'Everything began when Bruno\'s open Telegram community hit around 1,000 members. With 400 to 500 messages being exchanged daily, the group had become impossible to follow. The irony was cruel: the more the community grew, the less people engaged. Members who missed a day or two of conversations simply gave up trying to catch up. All that knowledge being generated, all those valuable discussions... lost in the noise.', icon: MessageSquare },
+          { title: 'A spark of an idea', desc: 'What if there was a way to summarize the main topics and send them by email to members? This would solve two problems at once: keep people engaged even without reading everything, and finally capture emails from this open community (something Telegram doesn\'t allow). And what if a bot could also send these summaries privately to interested members?', icon: Sparkles },
+          { title: 'Looking for a partner', desc: 'Bruno wasn\'t a developer. So he did what any good entrepreneur does: threw the idea in the community group and waited. André liked the challenge and offered to help build the project. The partnership that would change everything was born right there, in the same group that inspired the solution.', icon: Users }
         ]
       },
       {
         title: 'MVP v1',
         items: [
-          { title: 'ByteTalk is born', desc: 'A bot that summarizes daily conversations and sends the summary to members. Built in just 2 days with free infrastructure.', icon: Rocket },
-          { title: 'Viral Growth', desc: 'In 1 month, the bot reached 280 groups. On average, 8k messages were summarized per day (+200k per month). The cost kept increasing!', icon: TrendingUp },
-          { title: 'First Revenue', desc: 'We charged R$5 for people to receive summaries privately. We made R$300 MRR testing. But customer growth wasnt proportional to the number of leads.', icon: Star }
+          { title: 'ByteTalk comes to life', desc: 'André delivered a working prototype in just 2 days. No landing page, no fancy design — just a bot that worked. The initial hypothesis was bold: the bot would go viral, and monetization would come from B2C. They launched it in 9 WhatsApp groups and waited to see what would happen.', icon: Rocket },
+          { title: 'Uncontrolled virality', desc: 'In just one month, the bot had spread to 280 groups. People found it fun to have an AI summarizing their conversations and started adding the bot everywhere. On average, 8,000 messages were being summarized daily — over 200,000 per month. The problem? OpenAI and infrastructure costs were skyrocketing. Each new group was a new expense.', icon: TrendingUp },
+          { title: 'The first R$300', desc: 'They tested charging R$5 for people to receive summaries privately. R$300 in MRR emerged from the experiment. But something wasn\'t right: the bot was growing in random groups — soccer, cars, memes — places where nobody cared enough to pay R$5 for a summary. Costs always exceeded revenue.', icon: Star }
         ]
       },
       {
-        title: 'Validation',
+        title: 'The Pivot',
         items: [
-          { title: 'Separating wheat from chaff', desc: 'We turned off the bot in several random groups to discover who would raise their hand. We interviewed people who showed interest to understand their demands.', icon: Target },
-          { title: 'Discovering the ICP', desc: 'We observed 2 profiles: Community owners (especially paid ones) and Infoproducers. We offered R$38-48 to reactivate the tool.', icon: Users },
-          { title: 'Key Insights', desc: 'All competitors had very inferior solutions. As first movers in a new market, we had flexibility to set the price we wanted.', icon: Brain }
+          { title: 'Separating wheat from chaff', desc: 'With so much noise, it was impossible to understand who really valued the product. They made a radical decision: turn off the bot in dozens of random groups and see who would complain. The idea was simple — whoever raised their hand really cared. And several people raised their hands.', icon: Target },
+          { title: 'The ideal customer appears', desc: 'After many interviews with those who complained, two profiles emerged clearly: paid community owners and infoproducers. These people were willing to pay R$38 to R$48 to have the tool back. It wasn\'t about the summary — it was about understanding their community.', icon: Users },
+          { title: 'A blue ocean', desc: 'When they looked at the competition, they found only deficient solutions. As pioneers in this market, they could set whatever price they wanted. Now they had a product with viral potential, a defined target audience, and competitors far behind. Just one piece was missing: a clear value proposition.', icon: Brain }
         ]
       },
       {
         title: 'Alfa Version',
         items: [
-          { title: 'Value Proposition', desc: 'After 2-3 weeks of interviews, the value proposition became clear: RETENTION AND ENGAGEMENT. We decided to transform the bot into a SaaS.', icon: Sparkles },
-          { title: 'MVP v2 - The SaaS', desc: 'Real-time dashboard for community owners to analytically see everything happening in their group. Main features: topic summaries, most engaged members, hottest topics.', icon: BarChart3 },
-          { title: 'Beta Testers', desc: '"Holy sh*t, what an amazing dashboard!! Youre giving me GOLD in community management." - First beta tester feedback. Signal that we were heading in the right direction.', icon: Zap }
+          { title: 'The big discovery', desc: 'After 2 to 3 weeks talking to potential customers, everything clicked. The value wasn\'t in the summary. The value was in RETENTION AND ENGAGEMENT. Community owners weren\'t looking to save time — they wanted to understand who was engaged, who was leaving, what was working. The pivot was clear: transform the bot into a SaaS with analytics.', icon: Sparkles },
+          { title: 'The dashboard is born', desc: 'They built a real-time dashboard with the 3 most requested features: summary of topics discussed, ranking of most engaged members, and identification of hottest topics. Additionally, sentiment analysis, message count, shared links, and 30-day history. No more just a bot — now there was a complete intelligence platform.', icon: BarChart3 },
+          { title: 'Validation that brought chills', desc: '"Holy sh*t, what an amazing dashboard!! You\'re delivering GOLD in community management." The first beta tester\'s reaction left no doubt. They asked if they could share, if they could post about it. The excitement was contagious. This was the sign they were on the right path.', icon: Zap },
+          { title: 'Building a community of testers', desc: 'They created a group for onboarding and support. With each new beta tester, they sent a private message asking: how did you find out about the project? What are you trying to solve? What are your expectations? Every answer was gold. Feedback took time to come, but when it came, it came in waves — one member\'s idea triggered ideas from others.', icon: Users }
         ]
       },
       {
         title: 'Beta Version',
         items: [
-          { title: 'Pricing Structure', desc: 'R$99 for Alfa, R$179 for Beta, R$299 for Go Live. We created a price ladder based on number of members (Value Metric).', icon: Star },
-          { title: 'First Subscriber', desc: 'The first subscriber came from referral, not from the group! We launched pricing via WhatsApp and our landing page in the same week.', icon: Rocket },
-          { title: 'Reaching R$1k MRR', desc: 'Immediate increase of R$500 MRR. But then came high churn (~50%). The value proposition wasnt clear to customers.', icon: TrendingUp }
+          { title: 'The pricing strategy', desc: 'Without any benchmark in the market, they created a pricing ladder: R$99 for Alfa, R$179 for Beta, R$299 at Go Live. The logic? Whoever buys early keeps the discount forever — but if they churn and come back, they pay full price. If people complain about R$99, there\'s a problem. If they find it cheap, there\'s room to grow.', icon: Star },
+          { title: 'The first real subscriber', desc: 'The first paying customer didn\'t come from the beta testers group. They came from a referral. Someone had talked to someone who talked to someone else. In the same week, they launched pricing via WhatsApp and the landing page. The flywheel was starting to spin.', icon: Rocket },
+          { title: 'The R$1k MRR celebration and hangover', desc: 'There was an immediate jump of R$500 in MRR. R$1,000 monthly seemed like a dream achieved. But then reality hit: 50% churn in the following weeks. Half the customers were leaving. The value proposition still wasn\'t clear. People were signing up but didn\'t know what to do with all that data.', icon: TrendingUp },
+          { title: 'Evangelists emerge', desc: 'Something magical started happening. Some beta testers began helping answer questions in the support group. One of them, Flavia, even helped close a sale. When you\'re transparent and stay close to early users, relationships build naturally. Some people become genuine fans of the project.', icon: Users }
         ]
       },
       {
-        title: 'Refinement',
+        title: 'The Refinement',
         items: [
-          { title: 'Value Metric', desc: 'We defined engagement: a person who sent or reacted to 5 messages in the WhatsApp group within 5 days. The more interactions, the higher the engagement.', icon: Target },
-          { title: 'Time to Value', desc: '3 critical points: put bot in group, schedule a message, receive weekly engagement report. After implementing focused onboarding, churn dropped immediately.', icon: Zap },
-          { title: 'Bubble + API', desc: 'We outsourced frontend to Bubble with Felipe Raitano. André built an API for total code control - essential for future sale.', icon: Code }
+          { title: 'Defining the Value Metric', desc: 'They needed to answer a fundamental question: what exactly does MGM deliver? After much reflection, the answer emerged: engagement. But what is engagement? They defined it as: a person who sent or reacted to at least 5 messages in the group within 5 days. The more interactions, the higher the engagement. Higher engagement, happier community owner.', icon: Target },
+          { title: 'The path to the A-ha Moment', desc: 'They identified 3 critical steps for the customer to see value: 1) Put the bot in the group and activate the newsletter. 2) Schedule an automatic message. 3) Receive the weekly engagement report. This was the Time to Value. Their thesis: anyone who completes these 3 steps in the trial will see engagement increase and will pay to continue.', icon: Zap },
+          { title: 'The churn collapses', desc: 'After implementing an onboarding focused on these 3 steps, with daily messages during the trial guiding the user, the churn plummeted. People finally understood the value. The feeling of "now it works" was indescribable.', icon: TrendingUp },
+          { title: 'A hard but necessary decision', desc: 'They outsourced the frontend to Bubble, partnering with Felipe. This cost R$1,500/month, but brought agility — frontend wasn\'t something André enjoyed. Meanwhile, André built a robust API. Why? They\'re building MGM to sell one day, and for that they need total control of the code. Each decision with an eye on the future.', icon: Code }
         ]
       },
       {
         title: 'Go Live',
         items: [
-          { title: 'Upstairs Pricing', desc: 'Strategy of raising monthly price and keeping annual with discount. MRR went from R$1k to R$1.5k (50% increase) in a few days.', icon: TrendingUp },
-          { title: 'Sales Channels', desc: 'Priorities: partnerships with Micro-SaaS with same ICP, social media posts, paid traffic. Affiliates as parallel test.', icon: Globe },
-          { title: 'Competition Emerging', desc: 'Competitors appearing in the exact same market as our target audience. A good sign - validates market demand and gives "gas" to focus on sales.', icon: Users }
+          { title: 'The "Upstairs" strategy', desc: 'They created a bold pricing tactic: raise monthly prices, but keep annual with discount for a limited window. Those who had been following the project and gained confidence finally committed to annual plans. Result: MRR jumped from R$1k to R$1.5k in a few days. A 50% increase. Almost R$5k in cash injection in the first month.', icon: TrendingUp },
+          { title: 'Focused distribution', desc: 'With money in the account, it was time to scale. They defined priorities: partnerships with Micro-SaaS that have the same target audience, organic posts on LinkedIn, Instagram and YouTube, and paid traffic. Affiliates entered as a parallel experiment, using a tool from the community itself instead of Hotmart.', icon: Globe },
+          { title: 'Validation by competition', desc: 'Something interesting happened: competitors started appearing in the exact same market. At first it seemed threatening. Then they realized: this is a great sign. If others are investing in the same space, there\'s validated demand. It gave them "gas" to accelerate sales and consolidate the lead while they had it.', icon: Users },
+          { title: 'This is just the beginning', desc: 'Today MGM has a group with over 55 beta testers, an engaged community, a validated product, clear distribution channels, and a roadmap full of possibilities. The journey from a frustrated admin in a Telegram group to a SaaS that helps thousands of communities is just beginning. And the best part? Every step was documented so others can learn from the experience.', icon: Rocket }
         ]
       }
     ],
@@ -85,7 +89,7 @@ const content = {
       badge: 'Nossa Jornada',
       title: 'Timeline',
       titleHighlight: 'MGM',
-      subtitle: 'De uma dor em uma comunidade do Telegram até uma plataforma completa de inteligência de comunidades.',
+      subtitle: 'A história de como uma frustração pessoal virou uma plataforma que ajuda milhares de comunidades.',
       cta: 'Agendar Demo',
       stats: [
         { value: '280+', label: 'Grupos no 1º mês' },
@@ -97,57 +101,61 @@ const content = {
       {
         title: 'A Dor',
         items: [
-          { title: 'Scratch your own itch', desc: 'A dor surgiu quando a comunidade aberta no Telegram atingiu aproximadamente 1k de membros. Por ali, eram escritas entre 400-500 mensagens por dia! Quanto mais o grupo crescia, menor era o engajamento dos membros.', icon: MessageSquare },
-          { title: 'A Ideia', desc: 'Fazer um resumo dos principais assuntos e enviar por email para os membros. Isso geraria valor: engajamento dos membros (+retenção), e a possibilidade de captar e-mails da comunidade aberta.', icon: Sparkles },
-          { title: 'Encontrando um Parceiro Tech', desc: 'Bruno jogou a ideia no grupo da comunidade e o André Prado topou o desafio. A parceria nasceu.', icon: Users }
+          { title: 'Quando tudo começou', desc: 'Tudo começou quando a comunidade aberta do Bruno no Telegram bateu cerca de 1.000 membros. Com 400 a 500 mensagens sendo trocadas por dia, o grupo tinha se tornado impossível de acompanhar. A ironia era cruel: quanto mais a comunidade crescia, menos as pessoas engajavam. Membros que perdiam um ou dois dias de conversas simplesmente desistiam de tentar acompanhar. Todo aquele conhecimento sendo gerado, todas aquelas discussões valiosas... perdidas no ruído.', icon: MessageSquare },
+          { title: 'Uma fagulha de ideia', desc: 'E se existisse uma forma de resumir os principais assuntos e enviar por email para os membros? Isso resolveria dois problemas de uma vez: manter as pessoas engajadas mesmo sem ler tudo, e finalmente captar os emails dessa comunidade aberta (algo que o Telegram não permite). E se o bot, além de gerar o resumo, pudesse enviar também no privado para os membros interessados?', icon: Sparkles },
+          { title: 'Buscando um parceiro', desc: 'O Bruno não era desenvolvedor. Então fez o que qualquer bom empreendedor faz: jogou a ideia no grupo da comunidade e esperou. O André curtiu o desafio e se ofereceu para montar o projeto. A parceria que mudaria tudo nasceu ali mesmo, no grupo que inspirou a solução.', icon: Users }
         ]
       },
       {
         title: 'MVP v1',
         items: [
-          { title: 'Nasce o ByteTalk', desc: 'Um bot que resume as conversas do dia e envia o resumo para os membros. Construído em apenas 2 dias com infra gratuita.', icon: Rocket },
-          { title: 'Crescimento Viral', desc: 'Em 1 mês, o bot chegou em 280 grupos. Em média, 8 mil mensagens eram resumidas por dia (+200k no mês). O custo não parava de aumentar!', icon: TrendingUp },
-          { title: 'Primeira Receita', desc: 'Cobramos R$5 para que as pessoas recebessem os resumos no privado. Faturamos R$300 de MRR testando. Mas o crescimento de clientes não foi proporcional ao número de leads.', icon: Star }
+          { title: 'ByteTalk ganha vida', desc: 'O André entregou um protótipo funcionando em apenas 2 dias. Sem landing page, sem design elaborado — só um bot que funcionava. A hipótese inicial era ousada: o bot viralizaria, e a monetização viria do B2C. Lançaram em 9 grupos de WhatsApp e esperaram para ver o que aconteceria.', icon: Rocket },
+          { title: 'Viralidade descontrolada', desc: 'Em apenas um mês, o bot já estava em 280 grupos. As pessoas achavam divertido ter uma IA resumindo suas conversas e começaram a adicionar o bot em todo lugar. Em média, 8 mil mensagens eram resumidas por dia — mais de 200 mil por mês. O problema? Os custos de OpenAI e infraestrutura dispararam. Cada grupo novo era uma despesa nova.', icon: TrendingUp },
+          { title: 'Os primeiros R$300', desc: 'Testaram cobrar R$5 para as pessoas receberem os resumos no privado. R$300 de MRR surgiram do experimento. Mas algo não batia: o bot estava crescendo em grupos aleatórios — futebol, carros, memes — lugares onde ninguém se importava o suficiente para pagar R$5 por um resumo. O custo sempre ficava maior que a receita.', icon: Star }
         ]
       },
       {
-        title: 'Validação',
+        title: 'O Pivot',
         items: [
-          { title: 'Separando o joio do trigo', desc: 'Desligamos o bot em vários grupos aleatórios para descobrir quem levantaria a mão. Entrevistamos pessoas interessadas para entender suas demandas.', icon: Target },
-          { title: 'Descobrindo o ICP', desc: 'Observamos 2 perfis: Donos de comunidades (principalmente pagas) e Infoprodutores. Oferecemos entre R$38 e R$48 para religar a ferramenta.', icon: Users },
-          { title: 'Insights Chave', desc: 'Todos os concorrentes tinham soluções muito inferiores. Como first movers de um mercado novo, tínhamos flexibilidade de definir o preço que desejássemos.', icon: Brain }
+          { title: 'Separando o joio do trigo', desc: 'Com tanto ruído, era impossível entender quem realmente valorizava o produto. Tomaram uma decisão radical: desligar o bot em dezenas de grupos aleatórios e ver quem reclamaria. A ideia era simples — quem levantasse a mão, realmente se importava. E várias pessoas levantaram a mão.', icon: Target },
+          { title: 'O cliente ideal aparece', desc: 'Depois de muitas entrevistas com quem reclamou, dois perfis surgiram com clareza: donos de comunidades pagas e infoprodutores. Essas pessoas estavam dispostas a pagar entre R$38 e R$48 para ter a ferramenta de volta. Não era pelo resumo — era por entender a comunidade delas.', icon: Users },
+          { title: 'Um oceano azul', desc: 'Quando olharam para a concorrência, encontraram apenas soluções deficientes. Como pioneiros nesse mercado, podiam definir o preço que quisessem. Agora tinham um produto com potencial viral, um público-alvo definido, e concorrentes muito atrás. Só faltava uma peça: uma proposta de valor clara.', icon: Brain }
         ]
       },
       {
         title: 'Versão Alfa',
         items: [
-          { title: 'Proposta de Valor', desc: 'Depois de 2-3 semanas entrevistando pessoas, ficou clara a proposta de valor: RETENÇÃO E ENGAJAMENTO. Decidimos transformar o bot em um SaaS.', icon: Sparkles },
-          { title: 'MVP v2 - O SaaS', desc: 'Painel em tempo real para donos de comunidades enxergarem de forma analítica tudo o que acontecia no grupo. Principais features: resumo de tópicos, membros mais engajados, assuntos mais quentes.', icon: BarChart3 },
-          { title: 'Beta Testers', desc: '"Caralho, que painel foda!! Vocês estão me entregando OURO em gestão de comunidade." - Feedback do primeiro beta tester. Sinal de que estávamos olhando para a direção certa.', icon: Zap }
+          { title: 'A grande descoberta', desc: 'Depois de 2 a 3 semanas conversando com potenciais clientes, tudo fez sentido. O valor não estava no resumo. O valor estava em RETENÇÃO E ENGAJAMENTO. Donos de comunidades não queriam economizar tempo — queriam entender quem estava engajado, quem estava saindo, o que estava funcionando. O pivot era claro: transformar o bot em um SaaS com analytics.', icon: Sparkles },
+          { title: 'O dashboard nasce', desc: 'Construíram um painel em tempo real com as 3 funcionalidades mais pedidas: resumo dos tópicos conversados, ranking dos membros mais engajados, e identificação dos assuntos mais quentes. Além disso, análise de sentimento, contagem de mensagens, links compartilhados e histórico de 30 dias. Não era mais só um bot — agora tinha uma plataforma completa de inteligência.', icon: BarChart3 },
+          { title: 'A validação que arrepiou', desc: '"Caralho, que painel foda!! Vocês estão me entregando OURO em gestão de comunidade." A reação do primeiro beta tester não deixou dúvidas. Ele perguntou se podia divulgar, se podia postar. A empolgação era contagiante. Esse era o sinal de que estavam no caminho certo.', icon: Zap },
+          { title: 'Construindo uma comunidade de testers', desc: 'Criaram um grupo para onboarding e suporte. A cada novo beta tester, mandavam uma mensagem no privado perguntando: como você ficou sabendo do projeto? O que está buscando resolver? Qual sua expectativa? Cada resposta era ouro. Os feedbacks demoravam a vir, mas quando vinham, vinham em ondas — a ideia de um membro ativava ideias de outros.', icon: Users }
         ]
       },
       {
         title: 'Versão Beta',
         items: [
-          { title: 'Estrutura de Preços', desc: 'R$99 para Alfa, R$179 para Beta, R$299 para Go Live. Criamos uma escada de preços baseada na quantidade de membros (Value Metric).', icon: Star },
-          { title: 'Primeiro Assinante', desc: 'O primeiro assinante veio de indicação, e não do grupo! Lançamos preço via WhatsApp e nossa landing page na mesma semana.', icon: Rocket },
-          { title: 'Chegando em R$1k MRR', desc: 'Aumento imediato de R$500 de MRR. Mas logo depois veio o churn alto (~50%). A proposta de valor não estava clara para os clientes.', icon: TrendingUp }
+          { title: 'A estratégia de preços', desc: 'Sem nenhum benchmark no mercado, criaram uma escada de preços: R$99 no Alfa, R$179 no Beta, R$299 no Go Live. A lógica? Quem comprar cedo mantém o desconto para sempre — mas se der churn e voltar, paga preço cheio. Se as pessoas reclamarem de R$99, tem um problema. Se acharem barato, tem espaço para crescer.', icon: Star },
+          { title: 'O primeiro assinante de verdade', desc: 'O primeiro cliente pagante não veio do grupo de beta testers. Veio de uma indicação. Alguém tinha falado com alguém que falou com outra pessoa. Na mesma semana, lançaram o preço via WhatsApp e a landing page. O flywheel estava começando a girar.', icon: Rocket },
+          { title: 'A comemoração e a ressaca do R$1k MRR', desc: 'Houve um salto imediato de R$500 no MRR. R$1.000 mensais pareciam um sonho realizado. Mas então a realidade bateu: 50% de churn nas semanas seguintes. Metade dos clientes estava saindo. A proposta de valor ainda não estava clara. As pessoas assinavam, mas não sabiam o que fazer com todos aqueles dados.', icon: TrendingUp },
+          { title: 'Evangelistas surgem', desc: 'Algo mágico começou a acontecer. Alguns beta testers começaram a ajudar a responder dúvidas no grupo de suporte. Uma delas, a Flavia, chegou a ajudar a fechar uma venda. Quando você é transparente e fica próximo dos early-users, relacionamentos se constroem naturalmente. Algumas pessoas viram fãs genuínos do projeto.', icon: Users }
         ]
       },
       {
-        title: 'Refinamento',
+        title: 'O Refinamento',
         items: [
-          { title: 'Value Metric', desc: 'Definimos engajamento: pessoa que mandou ou reagiu a 5 mensagens no grupo do WhatsApp, no período de até 5 dias. Quanto mais interações, maior o engajamento.', icon: Target },
-          { title: 'Time to Value', desc: '3 pontos críticos: colocar bot no grupo, agendar uma mensagem, receber resumo semanal de engajamento. Depois de implementar onboarding focado, o churn caiu imediatamente.', icon: Zap },
-          { title: 'Bubble + API', desc: 'Terceirizamos o frontend para Bubble com o Felipe Raitano. O André construiu uma API para ter controle total do código - essencial para futura venda.', icon: Code }
+          { title: 'Definindo a Value Metric', desc: 'Era preciso responder uma pergunta fundamental: o que exatamente o MGM entrega? Depois de muita reflexão, a resposta surgiu: engajamento. Mas o que é engajamento? Definiram: uma pessoa que mandou ou reagiu a pelo menos 5 mensagens no grupo, no período de até 5 dias. Quanto mais interações, maior o engajamento. Engajamento alto, dono do grupo feliz.', icon: Target },
+          { title: 'O caminho até o A-ha Moment', desc: 'Identificaram 3 passos críticos para o cliente enxergar valor: 1) Colocar o bot no grupo e ativar a newsletter. 2) Agendar uma mensagem automática. 3) Receber o relatório semanal de engajamento. Esse era o Time to Value. A tese: quem completar esses 3 passos no trial vai ver o engajamento aumentar e vai pagar para continuar.', icon: Zap },
+          { title: 'O churn despenca', desc: 'Depois de implementar um onboarding focado nesses 3 passos, com mensagens diárias durante o trial guiando o usuário, o churn despencou. As pessoas finalmente entendiam o valor. A sensação de "agora funcionou" foi indescritível.', icon: TrendingUp },
+          { title: 'Uma decisão difícil mas necessária', desc: 'Terceirizaram o frontend para Bubble, fechando parceria com o Felipe. Isso custava R$1.500/mês, mas trazia agilidade — frontend não era algo que o André curtia. Enquanto isso, o André construiu uma API robusta. Por quê? Estão montando o MGM para um dia vender, e para isso precisam de controle total do código. Cada decisão com olho no futuro.', icon: Code }
         ]
       },
       {
         title: 'Go Live',
         items: [
-          { title: 'Precificação Upstairs', desc: 'Estratégia de subir o preço mensal e manter o anual com desconto. MRR foi de R$1k para R$1.5k (50% de aumento) em alguns dias.', icon: TrendingUp },
-          { title: 'Canais de Vendas', desc: 'Prioridades: parcerias com Micro-SaaS com mesmo ICP, postagens em redes sociais, tráfego pago. Afiliados como teste paralelo.', icon: Globe },
-          { title: 'Concorrência Surgindo', desc: 'Concorrentes aparecendo no exato mesmo mercado que nosso público-alvo. Bom sinal - valida a demanda de mercado e dá "gás" para focar nas vendas.', icon: Users }
+          { title: 'A estratégia "Upstairs"', desc: 'Criaram uma tática ousada de pricing: subir o preço do mensal, mas manter o anual com desconto por uma janela limitada. Quem estava acompanhando o projeto e ganhou confiança, finalmente se comprometeu com planos anuais. Resultado: MRR saltou de R$1k para R$1.5k em alguns dias. Um aumento de 50%. Quase R$5k de injeção no caixa no primeiro mês.', icon: TrendingUp },
+          { title: 'Distribuição com foco', desc: 'Com dinheiro na conta, era hora de escalar. Definiram prioridades: parcerias com Micro-SaaS que tenham o mesmo público-alvo, postagens orgânicas no LinkedIn, Instagram e YouTube, e tráfego pago. Afiliados entraram como experimento paralelo, usando uma ferramenta da própria comunidade em vez de Hotmart.', icon: Globe },
+          { title: 'Validação pela concorrência', desc: 'Algo interessante aconteceu: concorrentes começaram a aparecer no exato mesmo mercado. No início pareceu ameaçador. Depois perceberam: isso é um ótimo sinal. Se outros estão investindo no mesmo espaço, tem demanda validada. Deu "gás" para acelerar vendas e consolidar a liderança enquanto tinham.', icon: Users },
+          { title: 'Isso é só o começo', desc: 'Hoje o MGM tem um grupo com mais de 55 beta testers, uma comunidade engajada, um produto validado, canais de distribuição claros, e um roadmap cheio de possibilidades. A jornada de um admin frustrado em um grupo de Telegram até um SaaS que ajuda milhares de comunidades está só começando. E a melhor parte? Cada passo foi documentado para que outros possam aprender com a experiência.', icon: Rocket }
         ]
       }
     ],
