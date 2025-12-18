@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Users, BarChart3, MessageSquare, Zap, Brain, Rocket, ChevronRight, Star, Target, TrendingUp, Globe, Code, Bell } from 'lucide-react';
+import { ArrowRight, Sparkles, Users, BarChart3, MessageSquare, Zap, Brain, Rocket, ChevronRight, Star, Target, TrendingUp, Globe, Code, Play, Trophy } from 'lucide-react';
 import { Logo } from '../../App';
 import { Language } from '../../App';
 import { Timeline } from '../ui/Timeline';
@@ -370,7 +370,7 @@ export const TimelineMGM = ({ lang, onBack, setLang }: { lang: Language; onBack:
       </section>
 
       {/* Timeline Section */}
-      <section className="pb-24 relative">
+      <section className="pb-12 relative">
         {/* Section header */}
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-10 py-12">
           <motion.div
@@ -392,6 +392,187 @@ export const TimelineMGM = ({ lang, onBack, setLang }: { lang: Language; onBack:
         </div>
 
         <Timeline data={timelineData} />
+      </section>
+
+      {/* Conclusion Card - R$0 to R$100k */}
+      <section className="px-4 md:px-8 pb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="relative bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 rounded-[2rem] p-8 md:p-12 overflow-hidden">
+            {/* Background effects */}
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15]" />
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-[100px] -mr-48 -mt-48" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-teal-400/20 rounded-full blur-[80px] -ml-32 -mb-32" />
+
+            {/* Floating trophy icon */}
+            <motion.div
+              className="absolute top-8 right-8 md:top-12 md:right-12"
+              animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/20">
+                <Trophy className="w-8 h-8 md:w-10 md:h-10 text-yellow-300" />
+              </div>
+            </motion.div>
+
+            <div className="relative z-10">
+              {/* Badge */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white/90 text-xs font-bold uppercase tracking-wider mb-6"
+              >
+                <Sparkles size={12} />
+                {lang === 'en' ? 'The Result' : 'O Resultado'}
+              </motion.div>
+
+              {/* Main stat */}
+              <div className="mb-6">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                  className="flex items-baseline gap-2 mb-2"
+                >
+                  <span className="text-white/60 text-xl md:text-2xl font-medium">R$</span>
+                  <span className="text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tighter">0</span>
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
+                    className="text-3xl md:text-4xl text-white/80 mx-2 md:mx-4"
+                  >
+                    →
+                  </motion.span>
+                  <span className="text-white/60 text-xl md:text-2xl font-medium">R$</span>
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
+                    className="text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tighter"
+                  >
+                    100k
+                  </motion.span>
+                </motion.div>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.7 }}
+                  className="text-white/70 text-lg md:text-xl font-medium"
+                >
+                  {lang === 'en' ? 'in just 90 days' : 'em apenas 90 dias'}
+                </motion.p>
+              </div>
+
+              {/* Description */}
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8 }}
+                className="text-white/80 text-base md:text-lg leading-relaxed max-w-2xl"
+              >
+                {lang === 'en'
+                  ? 'This journey took us from a simple idea in a Telegram group to R$100k in revenue in just 90 days. Every experiment, every pivot, every conversation with customers led us here. And this is just the beginning.'
+                  : 'Essa jornada nos levou de uma simples ideia em um grupo de Telegram para R$100k em faturamento em apenas 90 dias. Cada experimento, cada pivot, cada conversa com clientes nos trouxe até aqui. E isso é só o começo.'}
+              </motion.p>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* MGM 1.0 Video Section */}
+      <section className="px-4 md:px-8 pb-24 bg-gradient-to-b from-[#FDFBF7] to-stone-100">
+        <div className="max-w-5xl mx-auto">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 border border-orange-200 text-orange-700 text-sm font-bold mb-6"
+            >
+              <Rocket size={14} />
+              {lang === 'en' ? 'NEW CHAPTER' : 'NOVO CAPÍTULO'}
+            </motion.div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-stone-900 mb-4 tracking-tight">
+              MGM <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">1.0</span>
+            </h2>
+            <p className="text-stone-500 text-lg md:text-xl max-w-2xl mx-auto">
+              {lang === 'en'
+                ? 'Watch the full story of how we built MGM from zero to product-market fit.'
+                : 'Assista a história completa de como construímos o MGM do zero até o product-market fit.'}
+            </p>
+          </motion.div>
+
+          {/* Video Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="relative group"
+          >
+            {/* Glow effect behind */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-orange-500/20 via-amber-500/20 to-orange-500/20 rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+            {/* Video container */}
+            <div className="relative bg-stone-900 rounded-[2rem] overflow-hidden shadow-2xl shadow-stone-900/20">
+              {/* Decorative top bar */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500" />
+
+              {/* YouTube Embed */}
+              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src="https://www.youtube.com/embed/rkVZRsKs3eQ?rel=0&modestbranding=1"
+                  title="MGM 1.0 - A História Completa"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+
+              {/* Bottom info bar */}
+              <div className="bg-stone-900 px-6 py-4 flex items-center justify-between border-t border-stone-800">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center">
+                    <Play size={16} className="text-white ml-0.5" fill="white" />
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold text-sm">MGM 1.0</p>
+                    <p className="text-stone-400 text-xs">{lang === 'en' ? 'The Complete Journey' : 'A Jornada Completa'}</p>
+                  </div>
+                </div>
+                <a
+                  href="https://youtu.be/rkVZRsKs3eQ?si=lSBLThxFS1K9mt6W"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-white text-sm font-medium transition-colors"
+                >
+                  <span>{lang === 'en' ? 'Watch on YouTube' : 'Ver no YouTube'}</span>
+                  <ArrowRight size={14} />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* CTA Section */}
