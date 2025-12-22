@@ -25,6 +25,7 @@ import { Logo } from '../../App';
 import { Language } from '../../App';
 import { SpiralAnimation } from '../animations/SpiralAnimation';
 import { PricingFeature } from '../features/PricingFeature';
+import { ScrollReveal } from '../ui/ScrollReveal';
 import { AnimatedShinyText } from '../ui/AnimatedShinyText';
 
 // Mini chart components for visual appeal
@@ -200,6 +201,11 @@ const content = {
             conversions: { title: 'Conversions', desc: 'Goal completions this period' },
             reactions: { title: 'Top Reactions', desc: 'Most used reactions' },
             activeMembers: { title: 'Most Active', desc: 'Highest engagement members' }
+        },
+        footer: {
+            title: 'Ready to calm the chaos?',
+            desc: 'Join thousands of community builders who use MGM to turn conversation into conversion.',
+            cta: 'Book a Demo'
         }
     },
     pt: {
@@ -226,6 +232,11 @@ const content = {
             conversions: { title: 'Conversões', desc: 'Metas atingidas no período' },
             reactions: { title: 'Top Reações', desc: 'Reações mais usadas' },
             activeMembers: { title: 'Mais Ativos', desc: 'Membros com maior engajamento' }
+        },
+        footer: {
+            title: 'Pronto para acalmar o caos?',
+            desc: 'Junte-se a milhares de construtores de comunidades que usam o MGM para transformar conversa em conversão.',
+            cta: 'Agendar Demo'
         }
     }
 };
@@ -278,7 +289,7 @@ export const AnalyticsLP = ({ lang, onBack, setLang }: { lang: Language, onBack:
                                 <button onClick={() => setLang('pt')} className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${lang === 'pt' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-400 hover:text-stone-600'}`}>PT</button>
                             </div>
                         )}
-                        <a href="#" className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3">{lang === 'en' ? 'Login' : 'Entrar'}</a>
+                        <a href="#login" className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3">{lang === 'en' ? 'Login' : 'Entrar'}</a>
                         <button className="h-9 px-5 rounded-full bg-stone-900 text-white font-medium hover:bg-stone-800 transition-all text-sm">
                             {t.hero.cta}
                         </button>
@@ -805,42 +816,149 @@ export const AnalyticsLP = ({ lang, onBack, setLang }: { lang: Language, onBack:
                 <PricingFeature lang={lang} />
             </section >
 
-            {/* CTA Section */}
-            < section className="px-6 py-24" >
-                <div className="max-w-4xl mx-auto bg-gradient-to-br from-stone-900 to-stone-800 rounded-3xl p-12 text-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-orange-500/20 blur-[100px] rounded-full" />
+            {/* Call to Action Footer */}
+            <section className="py-24 px-4 bg-white border-t border-stone-100">
+                <ScrollReveal>
+                    <div className="max-w-5xl mx-auto bg-stone-900 rounded-[2.5rem] p-8 md:p-24 text-center relative overflow-hidden shadow-2xl">
+                        {/* Noise texture */}
+                        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15] pointer-events-none" />
 
-                    <div className="relative z-10">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                            {lang === 'en' ? 'Ready to unlock your community insights?' : 'Pronto para desbloquear os insights da sua comunidade?'}
-                        </h2>
-                        <p className="text-stone-400 mb-8 max-w-xl mx-auto">
-                            {lang === 'en'
-                                ? 'Start analyzing your community data today. No credit card required.'
-                                : 'Comece a analisar os dados da sua comunidade hoje. Sem cartão de crédito.'}
-                        </p>
-                        <button className="h-12 px-8 rounded-full bg-white text-stone-900 font-semibold hover:bg-stone-100 transition-all flex items-center gap-2 mx-auto">
-                            {t.hero.cta} <ArrowRight size={16} />
-                        </button>
+                        {/* Rotating Logo Background - Ultra Modern */}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            {/* Outer slow rotation */}
+                            <motion.div
+                                className="absolute w-[500px] h-[500px] md:w-[700px] md:h-[700px]"
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 180, repeat: Infinity, ease: "linear" }}
+                            >
+                                <svg viewBox="0 0 100 100" className="w-full h-full">
+                                    <defs>
+                                        <linearGradient id="ctaGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stopColor="#f97316" stopOpacity="0.08" />
+                                            <stop offset="100%" stopColor="#ea580c" stopOpacity="0.03" />
+                                        </linearGradient>
+                                    </defs>
+                                    <rect x="35" y="35" width="30" height="30" rx="6" fill="url(#ctaGrad1)" />
+                                    <rect x="10" y="35" width="20" height="20" rx="4" fill="url(#ctaGrad1)" />
+                                    <rect x="70" y="35" width="20" height="20" rx="4" fill="url(#ctaGrad1)" />
+                                    <rect x="35" y="10" width="20" height="20" rx="4" fill="url(#ctaGrad1)" />
+                                    <rect x="35" y="70" width="20" height="20" rx="4" fill="url(#ctaGrad1)" />
+                                    <rect x="12" y="12" width="12" height="12" rx="3" fill="url(#ctaGrad1)" />
+                                    <rect x="76" y="12" width="12" height="12" rx="3" fill="url(#ctaGrad1)" />
+                                    <rect x="12" y="76" width="12" height="12" rx="3" fill="url(#ctaGrad1)" />
+                                    <rect x="76" y="76" width="12" height="12" rx="3" fill="url(#ctaGrad1)" />
+                                </svg>
+                            </motion.div>
+
+                            {/* Inner counter rotation */}
+                            <motion.div
+                                className="absolute w-[350px] h-[350px] md:w-[500px] md:h-[500px]"
+                                animate={{ rotate: -360 }}
+                                transition={{ duration: 240, repeat: Infinity, ease: "linear" }}
+                            >
+                                <svg viewBox="0 0 100 100" className="w-full h-full">
+                                    <defs>
+                                        <linearGradient id="ctaGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.06" />
+                                            <stop offset="100%" stopColor="#ffffff" stopOpacity="0.02" />
+                                        </linearGradient>
+                                    </defs>
+                                    <rect x="40" y="40" width="20" height="20" rx="4" fill="url(#ctaGrad2)" />
+                                    <rect x="20" y="25" width="15" height="15" rx="3" fill="url(#ctaGrad2)" />
+                                    <rect x="65" y="25" width="15" height="15" rx="3" fill="url(#ctaGrad2)" />
+                                    <rect x="20" y="60" width="15" height="15" rx="3" fill="url(#ctaGrad2)" />
+                                    <rect x="65" y="60" width="15" height="15" rx="3" fill="url(#ctaGrad2)" />
+                                </svg>
+                            </motion.div>
+
+                            {/* Breathing center glow */}
+                            <motion.div
+                                className="absolute w-64 h-64 md:w-96 md:h-96 rounded-full"
+                                style={{
+                                    background: 'radial-gradient(circle, rgba(249,115,22,0.25) 0%, rgba(249,115,22,0.1) 30%, transparent 70%)'
+                                }}
+                                animate={{
+                                    scale: [1, 1.15, 1],
+                                    opacity: [0.6, 0.8, 0.6]
+                                }}
+                                transition={{
+                                    duration: 6,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                            />
+
+                            {/* Secondary pulse ring */}
+                            <motion.div
+                                className="absolute w-48 h-48 md:w-72 md:h-72 rounded-full border border-orange-500/10"
+                                animate={{
+                                    scale: [1, 1.5, 1],
+                                    opacity: [0.3, 0, 0.3]
+                                }}
+                                transition={{
+                                    duration: 4,
+                                    repeat: Infinity,
+                                    ease: "easeOut"
+                                }}
+                            />
+                        </div>
+
+                        <div className="relative z-10">
+                            <h2 className="text-3xl md:text-6xl font-bold text-white mb-6 md:mb-8 tracking-tight">{t.footer.title}</h2>
+                            <p className="text-lg md:text-xl text-stone-400 mb-8 md:mb-10 max-w-2xl mx-auto">{t.footer.desc}</p>
+                            <motion.button
+                                whileHover={{ scale: 1.02, boxShadow: '0 0 50px -5px rgba(255,255,255,0.4)' }}
+                                whileTap={{ scale: 0.98 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                                className="bg-white text-stone-900 px-8 py-4 md:px-10 md:py-5 rounded-2xl font-bold text-lg hover:bg-stone-50 transition-colors shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] w-full md:w-auto"
+                            >
+                                {t.footer.cta}
+                            </motion.button>
+                        </div>
+                    </div>
+                </ScrollReveal>
+            </section>
+
+            {/* Footer */}
+            <footer className="bg-white text-stone-500 py-20 border-t border-stone-200">
+                <div className="max-w-7xl mx-auto px-4 md:px-8">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                        <div className="col-span-1 md:col-span-2">
+                            <div className="mb-6">
+                                <Logo />
+                            </div>
+                            <p className="max-w-sm text-lg font-light">
+                                {lang === 'en'
+                                    ? 'The operating system for modern communities. Built for calmness in a chaotic world.'
+                                    : 'O sistema operacional para comunidades modernas. Construído para calma em um mundo caótico.'}
+                            </p>
+                        </div>
+                        <div>
+                            <h4 className="text-stone-900 font-bold mb-6">{lang === 'en' ? 'Product' : 'Produto'}</h4>
+                            <ul className="space-y-4">
+                                <li><a href="#" onClick={(e) => { e.preventDefault(); onBack(); }} className="hover:text-orange-600 transition-colors">{lang === 'en' ? 'Features' : 'Funcionalidades'}</a></li>
+                                <li><span className="text-orange-600 font-medium">{lang === 'en' ? 'Analytics 2.0' : 'Analytics 2.0'}</span></li>
+                                <li><a href="#timeline" className="hover:text-orange-600 transition-colors">{lang === 'en' ? 'Our Journey' : 'Nossa Jornada'}</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 className="text-stone-900 font-bold mb-6">{lang === 'en' ? 'Company' : 'Empresa'}</h4>
+                            <ul className="space-y-4">
+                                <li><a href="#about" onClick={(e) => { e.preventDefault(); onBack(); }} className="hover:text-orange-600 transition-colors">{lang === 'en' ? 'About' : 'Sobre'}</a></li>
+                                <li><a href="https://mygroupmetrics.com/blog" target="_blank" rel="noopener noreferrer" className="hover:text-orange-600 transition-colors">Blog</a></li>
+                                <li><a href="https://wa.me/5511980905374" target="_blank" rel="noopener noreferrer" className="hover:text-orange-600 transition-colors">{lang === 'en' ? 'Contact' : 'Contato'}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="pt-8 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center text-sm">
+                        <p className="mb-4 md:mb-0">&copy; 2024 MyGroupMetrics Inc. {lang === 'en' ? 'All rights reserved.' : 'Todos os direitos reservados.'}</p>
+                        <div className="flex gap-6">
+                            <a href="#" className="hover:text-stone-900">{lang === 'en' ? 'Privacy' : 'Privacidade'}</a>
+                            <a href="#" className="hover:text-stone-900">{lang === 'en' ? 'Terms' : 'Termos'}</a>
+                        </div>
                     </div>
                 </div>
-            </section >
-
-            {/* Back Button */}
-            < section className="px-6 pb-16" >
-                <div className="max-w-4xl mx-auto text-center">
-                    <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={onBack}
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-stone-200 text-stone-600 hover:bg-stone-50 hover:border-stone-300 transition-all font-medium"
-                    >
-                        <ArrowRight className="rotate-180" size={16} />
-                        {lang === 'en' ? 'Back to Home' : 'Voltar ao Início'}
-                    </motion.button>
-                </div>
-            </section >
+            </footer>
         </div >
     );
 };

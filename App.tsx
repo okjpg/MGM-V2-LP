@@ -143,7 +143,7 @@ export const HeroSection = ({ lang, setLang }: { lang: Language, setLang: (l: La
               <button onClick={() => setLang('en')} className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${lang === 'en' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-400 hover:text-stone-600'}`}>EN</button>
               <button onClick={() => setLang('pt')} className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold transition-all ${lang === 'pt' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-400 hover:text-stone-600'}`}>PT</button>
             </div>
-            <a href="#" className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3">{t.login}</a>
+            <a href="#login" className="text-sm font-medium text-stone-600 hover:text-stone-900 px-3">{t.login}</a>
             <Button variant="default" size="sm" className="rounded-full px-5 h-9">{t.cta}</Button>
           </div>
 
@@ -243,7 +243,7 @@ export const HeroSection = ({ lang, setLang }: { lang: Language, setLang: (l: La
 
 export default function App() {
   const [lang, setLang] = useState<Language>('pt');
-  const [currentPage, setCurrentPage] = useState<'home' | 'analytics' | 'timeline'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'analytics' | 'timeline' | 'about' | 'login'>('home');
 
   const t = content[lang];
 
@@ -256,6 +256,12 @@ export default function App() {
         window.scrollTo(0, 0);
       } else if (hash === '#timeline') {
         setCurrentPage('timeline');
+        window.scrollTo(0, 0);
+      } else if (hash === '#about') {
+        setCurrentPage('about');
+        window.scrollTo(0, 0);
+      } else if (hash === '#login') {
+        setCurrentPage('login');
         window.scrollTo(0, 0);
       } else {
         setCurrentPage('home');
@@ -279,6 +285,9 @@ export default function App() {
   // Lazy load pages
   const AnalyticsLP = React.lazy(() => import('./components/pages/AnalyticsLP').then(m => ({ default: m.AnalyticsLP })));
   const TimelineMGM = React.lazy(() => import('./components/pages/TimelineMGM').then(m => ({ default: m.TimelineMGM })));
+  const AboutMGM = React.lazy(() => import('./components/pages/AboutMGM').then(m => ({ default: m.AboutMGM })));
+  const AboutPage = React.lazy(() => import('./components/pages/AboutPage').then(m => ({ default: m.AboutPage })));
+  const LoginPage = React.lazy(() => import('./components/pages/LoginPage').then(m => ({ default: m.LoginPage })));
 
   if (currentPage === 'analytics') {
     return (
@@ -292,6 +301,22 @@ export default function App() {
     return (
       <React.Suspense fallback={<div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center"><div className="animate-pulse text-stone-400">Loading...</div></div>}>
         <TimelineMGM lang={lang} onBack={navigateToHome} setLang={setLang} />
+      </React.Suspense>
+    );
+  }
+
+  if (currentPage === 'about') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center"><div className="animate-pulse text-stone-400">Loading...</div></div>}>
+        <AboutMGM lang={lang} onBack={navigateToHome} setLang={setLang} />
+      </React.Suspense>
+    );
+  }
+
+  if (currentPage === 'login') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center"><div className="animate-pulse text-stone-400">Loading...</div></div>}>
+        <LoginPage lang={lang} onBack={navigateToHome} />
       </React.Suspense>
     );
   }
@@ -462,18 +487,18 @@ export default function App() {
               <div>
                 <h4 className="text-stone-900 font-bold mb-6">{t.footer.product}</h4>
                 <ul className="space-y-4">
-                  <li><a href="#features" className="hover:text-orange-600 transition-colors">Features</a></li>
-                  <li><a href="#pricing" className="hover:text-orange-600 transition-colors">Pricing</a></li>
-                  <li><a href="#timeline" className="hover:text-orange-600 transition-colors">Timeline MGM</a></li>
+                  <li><a href="#features" className="hover:text-orange-600 transition-colors">{lang === 'en' ? 'Features' : 'Funcionalidades'}</a></li>
+                  <li><a href="#pricing" className="hover:text-orange-600 transition-colors">{lang === 'en' ? 'Pricing' : 'Preços'}</a></li>
+                  <li><a href="#about" className="hover:text-orange-600 transition-colors">{lang === 'en' ? 'About' : 'Sobre'}</a></li>
+                  <li><a href="#timeline" className="hover:text-orange-600 transition-colors">{lang === 'en' ? 'Our Journey' : 'Nossa Jornada'}</a></li>
                 </ul>
               </div>
               <div>
                 <h4 className="text-stone-900 font-bold mb-6">{t.footer.company}</h4>
                 <ul className="space-y-4">
-                  <li><a href="#" className="hover:text-orange-600 transition-colors">About</a></li>
-                  <li><a href="#" className="hover:text-orange-600 transition-colors">Blog</a></li>
-                  <li><a href="#" className="hover:text-orange-600 transition-colors">Careers</a></li>
-                  <li><a href="#" className="hover:text-orange-600 transition-colors">Contact</a></li>
+                  <li><a href="#about" className="hover:text-orange-600 transition-colors">{lang === 'en' ? 'About' : 'Sobre'}</a></li>
+                  <li><a href="https://mygroupmetrics.com/blog" target="_blank" rel="noopener noreferrer" className="hover:text-orange-600 transition-colors">Blog</a></li>
+                  <li><a href="https://wa.me/5511980905374" target="_blank" rel="noopener noreferrer" className="hover:text-orange-600 transition-colors">{lang === 'en' ? 'Contact' : 'Contato'}</a></li>
                 </ul>
               </div>
             </div>
